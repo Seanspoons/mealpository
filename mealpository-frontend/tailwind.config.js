@@ -28,6 +28,9 @@ module.exports = {
       },
       screens: {
         'lg-xl': '1075px'
+      },
+      fontFamily: {
+        'sans': ['Istok Web', 'Helvetica'],
       }
   },
   },
