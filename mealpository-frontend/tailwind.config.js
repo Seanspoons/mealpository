@@ -13,11 +13,14 @@ module.exports = {
       maxWidth: {
         'mb-home-text': '216px',
         'sm-home-text': '400px',
-        'md-home-text': '600px',
-        'lg-home-text': '216px',
+        'md-home-text': '700px',
+        'lg-home-text': '800px',
+        'xl-home-text': '800px',
       },
       spacing: {
+        '21': '5.25rem',
         '22': '5.5rem',
+        '23': '5.75rem',
       }
   },
   },
