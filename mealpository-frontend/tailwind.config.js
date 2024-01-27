@@ -27,7 +27,9 @@ module.exports = {
         '23': '5.75rem',
       },
       screens: {
-        'lg-xl': '1075px'
+        'lg-xl': '1075px',
+        'xl1650': '1650px',
+        'xl2100': '2100px',
       },
       fontFamily: {
         'sans': ['Istok Web', 'Helvetica'],
