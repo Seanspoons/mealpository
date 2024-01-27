@@ -28,7 +28,7 @@ module.exports = {
       },
       screens: {
         'lg-xl': '1075px',
-        'xl1650': '1650px',
+        'xl1730': '1730px',
         'xl2100': '2100px',
       },
       fontFamily: {
