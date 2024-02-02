@@ -1,4 +1,4 @@
-<div class="z-0 bg-white flex flex-col justify-center items-center pt-8 pl-6 pr-6 pb-8 w-full mt-12 sm:mt-14 md:mt-16 lg:mt-20">
+<div class="z-0 bg-white flex flex-col items-center pt-8 pl-6 pr-6 pb-8 w-full h-full flex-grow mt-12 sm:mt-14 md:mt-16 lg:mt-20">
 
     <h1 class="text-2xl sm:text-3xl lg:text-4xl">log in</h1>
     <div class="mt-10 w-full flex flex-col items-center">
@@ -6,11 +6,25 @@
             <input class="pl-3 h-8 w-full text-sm placeholder-4e4e4e border border-d9d9d9 rounded-md" type="text" placeholder="email">
             <input class="pl-3 h-8 w-full text-sm placeholder-4e4e4e border border-d9d9d9 rounded-md mt-4" type="text" placeholder="password">
             <div class="flex flex-row justify-between mt-3">
-                <p class="text-sm">keep me signed in</p>
+                <div class="flex flex-row">
+                    <input class="mr-2" type="checkbox">
+                    <p class="text-sm">keep me signed in</p>
+                </div>
                 <p class="text-sm text-013a63 underline">forgot password?</p>
             </div>
-            
+            <button class="bg-013a63 hover:bg-597385 text-white text-mb-button rounded-md w-full mt-6 h-9 text-center">log in 2</button>
+            <div class="flex flex-row justify-center items-center w-full">
+                <div class="my-5 border-t border-gray-300 w-1/2"></div>
+                <p class="text-4e4e4e text-sm text-center w-1/12">or</p>
+                <div class="my-5 border-t border-gray-300 w-1/2"></div>
+            </div>
+            <button class="bg-white border border-black hover:bg-597385 text-black text-mb-button rounded-md w-full mt-2 h-9 text-center">Sign in with Google</button>
+            <button class="bg-black hover:bg-597385 text-white text-mb-button rounded-md w-full mt-4 h-9 text-center">Log in with Apple</button>
+            <button class="bg-1877f2 hover:bg-597385 text-white text-mb-button rounded-md w-full mt-6 h-9 text-center">Log in with Facebook</button>
+            <div class="flex flex-row justify-center mt-4">
+                <p class="text-sm mr-4">don't have an account?</p>
+                <p class="text-sm underline">sign up</p>
+            </div>
         </form>
     </div>
-
 </div>
