@@ -7,6 +7,8 @@ module.exports = {
       'ebe9e5': '#ebe9e5',
       '013a63': '#013a63',
       '597385': '#597385',
+      'd9d9d9': '#d9d9d9',
+      '4e4e4e': '#4e4e4e',
     },
       fontSize: {
         'mb-button': '1.04rem',
