@@ -10,6 +10,7 @@ module.exports = {
       'd9d9d9': '#d9d9d9',
       '4e4e4e': '#4e4e4e',
       '1877f2': '#1877f2',
+      '545454': '#545454',
     },
       fontSize: {
         'mb-button': '1.04rem',
