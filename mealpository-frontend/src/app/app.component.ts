@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -14,6 +14,8 @@ import { HomeLoggedinComponent } from './components/home-loggedin/home-loggedin.
   imports: [
     CommonModule,
     RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
     HeaderComponent,
     HomeComponent,
     FooterComponent,
@@ -25,5 +27,5 @@ import { HomeLoggedinComponent } from './components/home-loggedin/home-loggedin.
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'mealpository-frontend';
+  title = 'mealpository';
 }
