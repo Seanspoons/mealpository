@@ -11,6 +11,7 @@ module.exports = {
       '4e4e4e': '#4e4e4e',
       '1877f2': '#1877f2',
       '545454': '#545454',
+      '0064ac': '#0064AC',
     },
       fontSize: {
         'mb-button': '1.04rem',

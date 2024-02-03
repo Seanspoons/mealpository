@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { HomeLoggedinComponent } from './components/home-loggedin/home-loggedin.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { SignupComponent } from './components/signup/signup.component';
     FooterComponent,
     LoginComponent,
     SignupComponent,
+    HomeLoggedinComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
