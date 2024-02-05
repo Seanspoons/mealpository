@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,26 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
-  email: string = '';
+  loginForm: FormGroup;
+
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
+    let loginFormControls = { /* Add more validators */
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    }
+    this.loginForm = new FormGroup(loginFormControls)
+  }
 
   onSubmit(): void {
+    
+    if(this.loginForm.valid) {
+      const email = this.loginForm.get('email')!.value;
+      const password = this.loginForm.get('password')!.value;
+
+      //this.authenticationService.login(email, password);
+    }
 
   }
 
