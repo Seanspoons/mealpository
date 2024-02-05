@@ -10,19 +10,7 @@ import { HomeLoggedinComponent } from './components/home-loggedin/home-loggedin.
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    HeaderComponent,
-    HomeComponent,
-    FooterComponent,
-    LoginComponent,
-    SignupComponent,
-    HomeLoggedinComponent,
-  ],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

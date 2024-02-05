@@ -11,3 +11,5 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     
 ];
+
+export default routes;
