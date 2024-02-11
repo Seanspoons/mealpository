@@ -25,9 +25,10 @@
 
         <!-- Button Container -->
         <div class="flex flex-row item-center justify-center z-0 w-3/4 mt-8 mb-6 md:mt-12 lg:mt-16">
-            <button (click)="onLoginClick()" routerLink="/login" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center mr-4 sm:mr-6 sm:w-28 md:mr-8">login</button>
-            <p class="text-2xl self-center text-center sm:text-3xl">•</p>
-            <button (click)="onSignUpClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center ml-4 sm:ml-6 sm:w-28 md:ml-8">sign up</button>
+            <button *ngIf="!loggedIn" (click)="onLoginClick()" routerLink="/login" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center mr-4 sm:mr-6 sm:w-28 md:mr-8">login</button>
+            <p *ngIf="!loggedIn" class="text-2xl self-center text-center sm:text-3xl">•</p>
+            <button *ngIf="!loggedIn" (click)="onSignUpClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center ml-4 sm:ml-6 sm:w-28 md:ml-8">sign up</button>
+            <button *ngIf="loggedIn" (click)="onHomeClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center sm:w-28">home</button>
         </div>
         <button class="bg-013a63 hover:bg-597385 text-white text-lg rounded-full w-9 h-9 text-center mt-4 lg:mt-28 xl:mt-[150px]">↓</button>
    </div>

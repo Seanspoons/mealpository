@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthenticationService } from '../../authentication/services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,20 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  loggedIn: boolean;
 
   constructor(
-    private router: Router
-    ) {}
+    private router: Router,
+    private authenticationService: AuthenticationService
+    ) {
+      this.loggedIn = this.authenticationService.isLoggedIn();
+    }
+
+  ngOnInit(): void {
+    this.loggedIn = this.authenticationService.isLoggedIn();
+  }
 
   onLoginClick(): void {
     this.router.navigate(['/login']);
@@ -19,6 +29,10 @@ export class HomeComponent {
 
   onSignUpClick(): void {
     this.router.navigate(['/signup']);
+  }
+
+  onHomeClick(): void {
+    this.router.navigate(['/home-loggedin']);
   }
 
 }

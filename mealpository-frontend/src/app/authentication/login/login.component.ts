@@ -52,6 +52,7 @@ export class LoginComponent {
                 parsingErrorDiv!.style.display = 'none';
                 this.parsingError = false;
               }
+              this.authenticationService.setLoggedIn(true);
               this.router.navigateByUrl('home-loggedin');
             },
             error => {

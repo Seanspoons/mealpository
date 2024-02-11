@@ -7,9 +7,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthenticationService {
 
+  loggedIn: boolean = false;
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) {  
+   }
   
   login(email: string, password: string): Observable<any> {
     const loginURL = 'http://127.0.0.1:8000/authentication/login';
@@ -29,6 +32,14 @@ export class AuthenticationService {
       'Authorization': 'Token ' + authToken
     });
     return this.http.get(verifyURL, { headers });
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  setLoggedIn(bool: boolean): void {
+    this.loggedIn = bool;
   }
 
 }
