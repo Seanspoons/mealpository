@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import routes from './app.routes';
 import { HomeModule } from './home/home.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     RouterModule.forRoot(routes),
     HomeModule,
     AuthenticationModule,
+    HttpClientModule,
   ],
   bootstrap: [AppComponent]
 })

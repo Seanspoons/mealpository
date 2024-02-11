@@ -28,7 +28,21 @@ export class LoginComponent {
       const email = this.loginForm.get('email')!.value;
       const password = this.loginForm.get('password')!.value;
 
-      //this.authenticationService.login(email, password);
+      this.authenticationService.login(email, password).subscribe(
+        response => {
+          var authToken = response.token;
+          
+          this.authenticationService.verifyToken(authToken).subscribe(
+            response => {
+              console.log("API Response: ", response);
+            }
+          );
+        },
+        error => {
+          console.error('Login error:', error);
+          // Handle error if necessary
+        }
+      );
     }
 
   }
