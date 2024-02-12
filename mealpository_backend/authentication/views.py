@@ -20,6 +20,16 @@ def login(request):
     return Response({"token": token.key, "user": serializer.data})
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def logout(request):
+    try:
+        token = Token.objects.get(user=request.user)
+        token.delete()
+        return Response({"detail": "Logged out successfully."}, status=status.HTTP_200_OK)
+    except Token.DoesNotExist:
+        return Response({"detail": "User is not logged in."}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():

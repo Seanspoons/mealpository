@@ -5,6 +5,12 @@ Content-Type: application/json
 
 ###
 
+POST http://127.0.0.1:8000/authentication/logout
+Content-Type: application/json
+Authorization: Token 28354a4f171cdbc8fdcd478981ed33e3c38f83f5
+
+###
+
 POST http://127.0.0.1:8000/authentication/signup
 Content-Type: application/json
 

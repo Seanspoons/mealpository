@@ -53,6 +53,7 @@ export class LoginComponent {
                 this.parsingError = false;
               }
               this.authenticationService.setLoggedIn(true);
+              this.authenticationService.setToken(authToken);
               this.router.navigateByUrl('home-loggedin');
             },
             error => {
