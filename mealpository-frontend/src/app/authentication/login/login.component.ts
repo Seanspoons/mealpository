@@ -34,9 +34,6 @@ export class LoginComponent {
       const email = this.loginForm.get('email')!.value;
       const password = this.loginForm.get('password')!.value;
 
-      const loginErrorDiv = document.getElementById('login-error');
-      const parsingErrorDiv = document.getElementById('parsing-error');
-
       this.authenticationService.login(email, password).subscribe(
         response => {
           var authToken = response.token;
@@ -44,43 +41,29 @@ export class LoginComponent {
           this.authenticationService.verifyToken(authToken).subscribe(
             response => {
               console.log("API Response: ", response);
-              if(this.loginError === true) {
-                loginErrorDiv!.style.display = 'none';
-                this.loginError = false;
-              }
-              if(this.parsingError === true) {
-                parsingErrorDiv!.style.display = 'none';
-                this.parsingError = false;
-              }
+              this.loginError = false;
+              this.parsingError = false;
               this.authenticationService.setLoggedIn(true);
               this.authenticationService.setToken(authToken);
               this.router.navigateByUrl('home-loggedin');
             },
             error => {
-              console.error('Token authentication error:', error);
-              if(this.loginError === true) {
-                loginErrorDiv!.style.display = 'none';
-                this.loginError = false;
-              }
-              parsingErrorDiv!.style.display = 'block';
+              this.loginError = false;
               this.parsingError = true;
             }
           );
         },
         error => {
           console.error('Login error:', error);
-          if(this.parsingError === true) {
-            parsingErrorDiv!.style.display = 'none';
             this.parsingError = false;
-          }
-          if(this.loginError === false) {
-            loginErrorDiv!.style.display = 'block';
             this.loginError = true;
-          }
         }
       );
     }
+  }
 
+  onSignupClick(): void {
+    this.router.navigateByUrl('signup');
   }
 
 }

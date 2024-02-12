@@ -25,9 +25,9 @@
 
         <!-- Button Container -->
         <div class="flex flex-row item-center justify-center z-0 w-3/4 mt-8 mb-6 md:mt-12 lg:mt-16">
-            <button *ngIf="!loggedIn" (click)="onLoginClick()" routerLink="/login" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center mr-4 sm:mr-6 sm:w-28 md:mr-8">login</button>
+            <button *ngIf="!loggedIn" (click)="onLoginClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center mr-4 sm:mr-6 sm:w-28 md:mr-8">login</button>
             <p *ngIf="!loggedIn" class="text-2xl self-center text-center sm:text-3xl">•</p>
-            <button *ngIf="!loggedIn" (click)="onSignUpClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center ml-4 sm:ml-6 sm:w-28 md:ml-8">sign up</button>
+            <button *ngIf="!loggedIn" (click)="onSignupClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center ml-4 sm:ml-6 sm:w-28 md:ml-8">sign up</button>
             <button *ngIf="loggedIn" (click)="onHomeClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center sm:w-28">home</button>
         </div>
         <button class="bg-013a63 hover:bg-597385 text-white text-lg rounded-full w-9 h-9 text-center mt-4 lg:mt-28 xl:mt-[150px]">↓</button>
@@ -62,6 +62,6 @@
 
     <div class="bg-ebe9e5 w-full flex flex-col justify-center items-center pt-6 pb-6 text-center sm:pt-5 sm:pb-5 md:pt-7 md:pb-7 lg:pt-9 lg:pb-9 xl:pt-[100px] xl:pb-[100px]">
         <p class="text-3xl max-w-[225px] sm:max-w-[600px] lg:max-w-[900px] sm:text-3xl lg:text-4xl">transfer your physical cookbooks to the web</p>
-        <button (click)="onSignUpClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-32 h-12 text-center mt-4 sm:mt-6 sm:w-32 sm:text-lg md:w-36 md:text-xl lg:mt-9">get started</button>
+        <button (click)="onSignupClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-32 h-12 text-center mt-4 sm:mt-6 sm:w-32 sm:text-lg md:w-36 md:text-xl lg:mt-9">get started</button>
     </div>
 </div>

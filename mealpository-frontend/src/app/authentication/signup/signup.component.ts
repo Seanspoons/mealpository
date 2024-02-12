@@ -34,30 +34,25 @@ export class SignupComponent {
       const email = this.signupForm.get('email')!.value;
       const password = this.signupForm.get('password')!.value;
 
-      const signupErrorDiv = document.getElementById('signup-error');
-
       this.authenticationService.signup(firstName, email, password).subscribe(
         response => {
           var authToken = response.token;
           console.log('Signed up:', response);
-          if(this.signupError === true) {
-            signupErrorDiv!.style.display = 'none';
-            this.signupError = false;
-          }
+          this.signupError = false;
           this.authenticationService.setLoggedIn(true);
           this.authenticationService.setToken(authToken);
           this.router.navigateByUrl('home-loggedin');
         },
         error => {
           console.error('Login error:', error);
-          if(this.signupError === false) {
-            signupErrorDiv!.style.display = 'block';
-            this.signupError = true;
-          }
+          this.signupError = true;
         }
       );
     }
+  }
 
+  onLoginClick(): void {
+    this.router.navigateByUrl('login');
   }
 
 }

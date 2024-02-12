@@ -30,8 +30,8 @@
                 class="pl-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md mt-6 md:h-14 md:mt-8"
             > <!-- change to text input if user presses to see password -->
 
-            <div id="signup-error" class="hidden mt-2 md:mt-3">
-                <p class="text-red-600 text-left">there is already an account with that email -- login or try another</p>
+            <div *ngIf="signupError" class="mt-2 md:mt-3">
+                <p class="text-red-600 text-left">there is already an account with that email - <a class="text-red-600 underline cursor-pointer" (click)="onLoginClick()">login</a> or try another</p>
             </div>
 
             <p class="text-sm mt-2">password should be a minimum of 6 characters</p>
@@ -48,6 +48,11 @@
             <button type="submit" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-full mt-8 h-12 text-center md:h-14 md:mt-10">create account</button>
 
         </form>
+
+        <div class="flex flex-row justify-center mt-4 mb-4 md:mt-5 md:mb-5">
+            <p class="text-base mr-4">already have an account?</p>
+            <a class="text-base underline cursor-pointer" (click)="onLoginClick()">login</a>
+        </div>
 
     </div>
 </div>
