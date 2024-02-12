@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import { Observer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,45 +22,61 @@ export class LoginComponent {
   ) {
     this.loginError = false;
     this.parsingError = false;
-    let loginFormControls = { /* Add more validators */
+    this.loginForm = new FormGroup({ // Add more validators
       email: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    }
-    this.loginForm = new FormGroup(loginFormControls)
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    });
   }
 
   onSubmit(): void {
-    
-    if(this.loginForm.valid) {
+    if (this.loginForm.valid) {
       const email = this.loginForm.get('email')!.value;
       const password = this.loginForm.get('password')!.value;
-
-      this.authenticationService.login(email, password).subscribe(
-        response => {
+  
+      const loginSubscription = this.authenticationService.login(email, password).subscribe({
+        next: (response) => { // Handle successful login
           var authToken = response.token;
-          
-          this.authenticationService.verifyToken(authToken).subscribe(
-            response => {
+  
+          const tokenSubscription = this.authenticationService.verifyToken(authToken).subscribe({
+            next: (response) => { // Handle successful token verification
               console.log("API Response: ", response);
-              this.loginError = false;
-              this.parsingError = false;
-              this.authenticationService.setLoggedIn(true);
-              this.authenticationService.setToken(authToken);
-              this.router.navigateByUrl('home-loggedin');
+              this.handleLoginSuccess(authToken);
             },
-            error => {
-              this.loginError = false;
-              this.parsingError = true;
+            error: (error) => { // Handle error in token verification
+              this.handleTokenVerificationError();
+            },
+            complete: () => { // Unsubscribe in completion of token verification
+              tokenSubscription.unsubscribe();
             }
-          );
+          });
         },
-        error => {
-          console.error('Login error:', error);
-            this.parsingError = false;
-            this.loginError = true;
+        error: (error) => { // Handle error in login
+          this.handleLoginError(error);
+        },
+        complete: () => { // Unsubscribe in completion of login
+          loginSubscription.unsubscribe();
         }
-      );
+      });
     }
+  }
+
+  handleLoginSuccess(authToken: string): void {
+    this.loginError = false;
+    this.parsingError = false;
+    this.authenticationService.setLoggedIn(true);
+    this.authenticationService.setToken(authToken);
+    this.router.navigateByUrl('home-loggedin');
+  }
+
+  handleLoginError(error: any): void {
+    console.error('Login error:', error);
+    this.parsingError = false;
+    this.loginError = true;
+  }
+
+  handleTokenVerificationError(): void {
+    this.loginError = false;
+    this.parsingError = true;
   }
 
   onSignupClick(): void {
