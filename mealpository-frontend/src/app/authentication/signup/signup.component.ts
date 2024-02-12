@@ -19,12 +19,11 @@ export class SignupComponent {
     private router: Router
   ) {
     this.signupError = false;
-    let loginFormControls = { /* Add more validators */
+    this.signupForm = new FormGroup({ // Add more validators
       firstName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    }
-    this.signupForm = new FormGroup(loginFormControls)
+    });
   }
 
   onSubmit(): void {
@@ -36,19 +35,27 @@ export class SignupComponent {
 
       this.authenticationService.signup(firstName, email, password).subscribe(
         response => {
-          var authToken = response.token;
           console.log('Signed up:', response);
-          this.signupError = false;
-          this.authenticationService.setLoggedIn(true);
-          this.authenticationService.setToken(authToken);
-          this.router.navigateByUrl('home-loggedin');
+          var authToken = response.token;
+          this.handleSignupSuccess(authToken);
         },
         error => {
           console.error('Login error:', error);
-          this.signupError = true;
+          this.handleSignupError();
         }
       );
     }
+  }
+
+  handleSignupSuccess(authToken: string): void {
+    this.signupError = false;
+    this.authenticationService.setLoggedIn(true);
+    this.authenticationService.setToken(authToken);
+    this.router.navigateByUrl('home-loggedin');
+  }
+
+  handleSignupError(): void {
+    this.signupError = true;
   }
 
   onLoginClick(): void {
