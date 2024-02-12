@@ -42,11 +42,11 @@ export class AuthenticationService {
     return this.http.post(logoutURL, {}, httpOptions);
   }
 
-  /*
-  signup(firstName: string, email: string, password: string): Observable<any> {
-    
+  signup(first_name: string, email: string, password: string): Observable<any> {
+    const signupURL = 'http://127.0.0.1:8000/authentication/signup';
+    const requestBody = { first_name, email, password };
+    return this.http.post(signupURL, requestBody);
   }
-  */
 
   verifyToken(authToken: string): Observable<any> {
     const verifyURL = 'http://127.0.0.1:8000/authentication/test_token'
