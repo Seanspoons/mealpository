@@ -30,10 +30,10 @@
             <button *ngIf="!loggedIn" (click)="onSignupClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center ml-4 sm:ml-6 sm:w-28 md:ml-8">sign up</button>
             <button *ngIf="loggedIn" (click)="onHomeClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-24 h-12 text-center sm:w-28">home</button>
         </div>
-        <button class="bg-013a63 hover:bg-597385 text-white text-lg rounded-full w-9 h-9 text-center mt-4 lg:mt-28 xl:mt-[150px]">↓</button>
+        <button (click)="onScrollClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-full w-9 h-9 text-center mt-4 lg:mt-28 xl:mt-[150px]">↓</button>
    </div>
 
-   <div class="w-full flex flex-col justify-center items-center pt-6 pb-6 text-center">
+   <div id="how-it-works" #howItWorks class="w-full flex flex-col justify-center items-center pt-6 pb-6 text-center">
         <div class="max-w-sm-works-text lg:max-w-md-home-text">
             <h1 class="text-3xl lg:text-4xl">how it works</h1>
             <p class="text-sm lg:text-base">upload pdfs or images • categorize • enjoy your recipes in one place • stress free meal planning</p>
