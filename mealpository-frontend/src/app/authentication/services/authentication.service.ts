@@ -38,7 +38,7 @@ export class AuthenticationService {
         'Authorization': `Token ${token}`
       })
     };
-    console.log("Logging out");
+    //console.log("Logging out");
     return this.http.post(logoutURL, {}, httpOptions);
   }
 
