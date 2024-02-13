@@ -65,7 +65,7 @@ export class LoginComponent {
     this.parsingError = false;
     this.authenticationService.setLoggedIn(true);
     this.authenticationService.setToken(authToken);
-    this.router.navigateByUrl('home-loggedin');
+    this.router.navigateByUrl('home');
   }
 
   handleLoginError(error: any): void {

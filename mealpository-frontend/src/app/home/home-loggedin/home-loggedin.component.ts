@@ -22,7 +22,7 @@ export class HomeLoggedinComponent implements OnInit {
   ngOnInit(): void {
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
-        console.log("API Response: ", response);
+        //console.log("API Response: ", response);
         this.firstName = response.data.first_name;
       },
       error: (error) => { // Handle error in token verification

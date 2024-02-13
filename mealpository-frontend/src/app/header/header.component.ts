@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   updateName(): void {
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
-        console.log("API Response: ", response);
+        //console.log("API Response: ", response);
         this.firstName = response.data.first_name;
       },
       error: (error) => { // Handle error in token verification
@@ -70,23 +70,38 @@ export class HeaderComponent implements OnInit {
   }
 
   onListClick(type: string): void {
-    if(type === 'recipes')
+    this.loggedIn = this.authenticationService.isLoggedIn();
+    if(type === 'home') {
+      if(this.loggedIn) {
+        this.menuToggled = false;
+        this.router.navigateByUrl('home');
+      } else {
+        this.menuToggled = false;
+        this.router.navigateByUrl('');
+      }
+    }
+
+    else if(type === 'recipes') {
       this.menuToggled = false;
       this.router.navigateByUrl('recipes'); // Need to make recipes component
+    }
 
-    if(type === 'calendar')
+    else if(type === 'calendar') {
       this.menuToggled = false;
       this.router.navigateByUrl('calendar'); // Need to make calendar component
+    }
 
-    if(type === 'help')
+    else if(type === 'help') {
       this.menuToggled = false;
       this.router.navigateByUrl('help'); // Need to make help component
+    }
 
-    if(type === 'settings')
+    else if(type === 'settings') {
       this.menuToggled = false;
       this.router.navigateByUrl('settings'); // Need to make settings component
+    }
 
-    if(type === 'logout') { // Need to add a prompt asking the user if they are sure
+    else if(type === 'logout') { // Need to add a prompt asking the user if they are sure
       this.menuToggled = false;
       this.authenticationService.logout(this.authenticationService.getToken()).subscribe(
         response => {
@@ -102,9 +117,10 @@ export class HeaderComponent implements OnInit {
       );
     }
 
-    if(type === 'login')
+    else if(type === 'login') {
       this.menuToggled = false;
       this.router.navigateByUrl('login');
+    }
   }
 
 }

@@ -12,7 +12,7 @@
 <div *ngIf="menuToggled" class="absolute bg-white text-base md:text-lg mt-14 md:mt-16 lg:mt-20 h-full w-5/12 max-w-[250px] top-0 left-0 z-50">
     <p *ngIf="loggedIn" class="px-4 mt-4 md:mt-6">good morning {{ firstName }}</p>
     <ul class="mt-4 md:mt-6">
-      <li><a href="#" class="block px-4 py-2 text-black hover:bg-597385">home</a></li>
+      <li><a (click)="onListClick('home')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">home</a></li>
       <li *ngIf="loggedIn"><a (click)="onListClick('recipes')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">recipes</a></li>
       <li *ngIf="loggedIn"><a (click)="onListClick('calendar')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">calendar</a></li>
       <li><a (click)="onListClick('help')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">help</a></li>

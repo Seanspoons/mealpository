@@ -51,7 +51,7 @@ export class SignupComponent {
     this.signupError = false;
     this.authenticationService.setLoggedIn(true);
     this.authenticationService.setToken(authToken);
-    this.router.navigateByUrl('home-loggedin');
+    this.router.navigateByUrl('home');
   }
 
   handleSignupError(): void {

@@ -24,15 +24,15 @@ export class HomeComponent implements OnInit {
   }
 
   onLoginClick(): void {
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('login');
   }
 
   onSignupClick(): void {
-    this.router.navigate(['/signup']);
+    this.router.navigateByUrl('signup');
   }
 
   onHomeClick(): void {
-    this.router.navigate(['/home-loggedin']);
+    this.router.navigateByUrl('home');
   }
 
 }
