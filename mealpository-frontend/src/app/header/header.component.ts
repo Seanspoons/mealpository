@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedIn = this.authenticationService.isLoggedIn();
+    this.updateName();
+  }
+
+  updateName(): void {
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
         console.log("API Response: ", response);
@@ -43,6 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onMenuClick() {
+    this.updateName();
     this.loggedIn = this.authenticationService.isLoggedIn();
     this.menuToggled = !this.menuToggled;
     if (this.menuToggled) {
