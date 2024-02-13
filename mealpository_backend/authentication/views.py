@@ -46,3 +46,14 @@ def signup(request):
 @permission_classes([IsAuthenticated])
 def test_token(request):
     return Response({"passed for {}".format(request.user.email)})
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def user_info(request):
+    user = request.user
+    data = {
+        'email': user.email,
+        'first_name': user.first_name
+    }
+    return Response({"detail": "data retrieved successfully.", "data": data})

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication/services/authentication.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +15,31 @@ export class HeaderComponent implements OnInit {
 
   menuToggled: boolean = false;
   loggedIn: boolean;
+  firstName!: string;
 
   constructor(
     private elementRef: ElementRef,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private userService: UserService
   ) {
     this.loggedIn = this.authenticationService.isLoggedIn();
   }
 
   ngOnInit(): void {
     this.loggedIn = this.authenticationService.isLoggedIn();
+    const userSubscription = this.userService.getUserInfo().subscribe({
+      next: (response) => { // Handle successful token verification
+        console.log("API Response: ", response);
+        this.firstName = response.data.first_name;
+      },
+      error: (error) => { // Handle error in token verification
+        this.firstName = '';
+      },
+      complete: () => { // Unsubscribe in completion of token verification
+        userSubscription.unsubscribe();
+      }
+    });
   }
 
   onMenuClick() {
