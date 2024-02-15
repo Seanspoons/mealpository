@@ -16,17 +16,19 @@ export class HomeLoggedinComponent implements OnInit {
   currentMonth!: string;
   currentYear!: string;
   datesOfWeek!: string[];
-  weeksFromCurrent = 0;
+  weeksFromCurrent!: number;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private dateService: DateService,
     private router: Router,
-    ) {}
+    ) {
+      console.log("Home-LoggedIn Constructor");
+    }
 
   ngOnInit(): void {
-
+    console.log("Home-LoggedIn OnInit");
     // Get user's first name
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
@@ -47,7 +49,10 @@ export class HomeLoggedinComponent implements OnInit {
 
     // Get current month and year
     this.currentMonth = this.dateService.getCurrentMonth();
-    this.currentYear = this.dateService.getCurrentYear();    
+    this.currentYear = this.dateService.getCurrentYear();
+    
+    // Update weeks from current
+    this.weeksFromCurrent = this.dateService.getWeeksFromCurrent();
   }
 
   onLogoutClick(): void {
@@ -76,6 +81,7 @@ export class HomeLoggedinComponent implements OnInit {
 
   onCalendarLeftClick() {
     this.weeksFromCurrent--;
+    this.dateService.updateWeeksFromCurrent(this.weeksFromCurrent);
     this.dateService.goBackWeek(this.weeksFromCurrent);
     this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
     this.currentMonth = this.dateService.getCurrentMonth();
@@ -84,6 +90,7 @@ export class HomeLoggedinComponent implements OnInit {
 
   onCalendarRightClick() {
     this.weeksFromCurrent++;
+    this.dateService.updateWeeksFromCurrent(this.weeksFromCurrent);
     this.dateService.goForwardWeek(this.weeksFromCurrent);
     this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
     this.currentMonth = this.dateService.getCurrentMonth();
@@ -92,8 +99,12 @@ export class HomeLoggedinComponent implements OnInit {
 
   returnToCurrentWeek(): void {
     if(this.weeksFromCurrent < 0) {
+      this.weeksFromCurrent = 0;
+      this.dateService.updateWeeksFromCurrent(this.weeksFromCurrent);
       this.dateService.goForwardWeek(0);
     } else if(this.weeksFromCurrent > 0) {
+      this.weeksFromCurrent = 0;
+      this.dateService.updateWeeksFromCurrent(this.weeksFromCurrent);
       this.dateService.goBackWeek(0);
     } else {
       

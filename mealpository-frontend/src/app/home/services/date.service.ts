@@ -12,58 +12,81 @@ export class DateService {
   currentDatesOfWeek: string[] = [];
   currentMonth!: string;
   currentYear!: string;
+  weeksFromCurrent = 0; // Initalize as 0 as we are on the current week
 
-  constructor() { }
+  constructor() {}
 
   updateDatesOfWeek(): void {
-    const startOfWeek = moment().startOf('week');
 
-    const currentMonthIndex = startOfWeek.clone().month();
-    this.currentMonth = this.months[currentMonthIndex];
-    this.currentYear = startOfWeek.clone().format('YYYY');
+    if(this.weeksFromCurrent === 0) { // If we are on the current week
+      this.currentDatesOfWeek = []; // Start out with an empty array which will have the 7 dates of the week in the end
+      
+      const startOfWeek = moment().startOf('week'); // Get the start of the week
+      const endOfWeek = moment().endOf('week'); // and get the end of the week
 
-    for(let i = 0; i < 7; i++) {
-      this.currentDatesOfWeek.push(startOfWeek.clone().add(i, 'days').format('D'));
+      this.compareMonthIndex(endOfWeek, startOfWeek); // Compare months to see if week spans days in 1 or 2 months
+      this.compareYears(endOfWeek, startOfWeek) // Compare years to see if week spans days in 1 or 2 years
+
+      for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
+        this.currentDatesOfWeek.push(startOfWeek.clone().add(i, 'days').format('D'));
+      }
+
+    } else if(this.weeksFromCurrent < 0) { // If we are a week/weeks behind the current week
+      this.goBackWeek(this.weeksFromCurrent); // then use the go back function to populate the dates of the current week
+    } else if(this.weeksFromCurrent > 0) { // If we are a week/weeks ahead of the current week
+      this.goForwardWeek(this.weeksFromCurrent); // then use the go forward function to populate the dates of the current week
     }
+
   }
 
   goBackWeek(weeks: number): void {
-    this.currentDatesOfWeek = [];
-    const startOfPreviousWeek = moment().add(weeks, 'weeks').startOf('week');
-    const endOfPreviousWeek = moment().add(weeks, 'weeks').endOf('week');
+    this.currentDatesOfWeek = []; // Start out with an empty array which will have the 7 dates of the week in the end
 
-    const currentMonthIndexEnd = endOfPreviousWeek.clone().month();
-    const currentMonthIndexStart = startOfPreviousWeek.clone().month();
-    if(currentMonthIndexEnd === currentMonthIndexStart) {
-      this.currentMonth = this.months[currentMonthIndexStart];
-    } else {
-      this.currentMonth = this.months[currentMonthIndexStart] + ' / ' + this.months[currentMonthIndexEnd];
-    }
+    const endOfPreviousWeek = moment().add(weeks, 'weeks').endOf('week'); // Get the end of the previous week
+    const startOfPreviousWeek = moment().add(weeks, 'weeks').startOf('week'); // and get the start of the previous week
 
-    this.currentYear = startOfPreviousWeek.clone().format('YYYY');
+    this.compareMonthIndex(endOfPreviousWeek, startOfPreviousWeek); // Compare months to see if week spans days in 1 or 2 months
+    this.compareYears(endOfPreviousWeek, startOfPreviousWeek); // Compare years to see if week spans days in 1 or 2 years
 
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
       this.currentDatesOfWeek.push(startOfPreviousWeek.clone().add(i, 'days').format('D'));
     }
   }
 
   goForwardWeek(weeks: number): void {
-    this.currentDatesOfWeek = [];
-    const startOfNextWeek = moment().add(weeks, 'weeks').startOf('week');
-    const endOfNextWeek = moment().add(weeks, 'weeks').endOf('week');
+    this.currentDatesOfWeek = []; // Start out with an empty array which will have the 7 dates of the week in the end
 
-    const currentMonthIndexEnd = endOfNextWeek.clone().month();
-    const currentMonthIndexStart = startOfNextWeek.clone().month();
-    if(currentMonthIndexEnd === currentMonthIndexStart) {
-      this.currentMonth = this.months[currentMonthIndexStart];
-    } else {
-      this.currentMonth = this.months[currentMonthIndexStart] + ' / ' + this.months[currentMonthIndexEnd];
-    }
+    const endOfNextWeek = moment().add(weeks, 'weeks').endOf('week'); // Get the end of the next week
+    const startOfNextWeek = moment().add(weeks, 'weeks').startOf('week'); // and get the start of the next week
 
-    this.currentYear = startOfNextWeek.clone().format('YYYY');
+    this.compareMonthIndex(endOfNextWeek, startOfNextWeek); // Compare months to see if week spans days in 1 or 2 months
+    this.compareYears(endOfNextWeek, startOfNextWeek); // Compare years to see if week spans days in 1 or 2 years
 
-    for(let i = 0; i < 7; i++) {
+    for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
       this.currentDatesOfWeek.push(startOfNextWeek.clone().add(i, 'days').format('D'));
+    }
+  }
+
+  compareMonthIndex(endOfWeek: moment.Moment, startOfWeek: moment.Moment): void {
+    const currentMonthIndexEnd = endOfWeek.clone().month(); // Get index of month from the end of the week
+    const currentMonthIndexStart = startOfWeek.clone().month(); // and get index of the month from the start of the week
+
+    if(currentMonthIndexEnd === currentMonthIndexStart) { // If the month is the same at the start and end of the week
+      this.currentMonth = this.months[currentMonthIndexStart]; // then the current month is the index at the start (or the end as they are the same)
+    } else { // Otherwise the week spans days in both months
+      this.currentMonth = this.months[currentMonthIndexStart] + ' / ' + this.months[currentMonthIndexEnd]; // then take both months and store them to display
+    }
+  }
+
+  compareYears(endOfWeek: moment.Moment, startOfWeek: moment.Moment): void {
+    const currentYearStart = startOfWeek.clone().format('YYYY'); // Get year at beginning of week
+    const currentYearEnd = endOfWeek.clone().format('YYYY'); // and get year at end of week
+    // We do this in case a week spans days in two years which could happen at the end of December into January
+
+    if(currentYearStart === currentYearEnd) { // If the year is the same at the start and end of the week
+      this.currentYear = currentYearStart; // then the current year is the year the start (or at the end as they are the same)
+    } else { // Otherwise the week spans days in both years
+      this.currentYear = currentYearStart + ' / ' + currentYearEnd; // then take both years and store them to display
     }
   }
 
@@ -79,121 +102,12 @@ export class DateService {
     return this.currentYear;
   }
 
-
-  /*
-  minusFiveDays = this.getLastDayOfPreviousMonth() - 5;
-  minusFourDays = this.getLastDayOfPreviousMonth() - 4;
-  minusThreeDays = this.getLastDayOfPreviousMonth() - 3;
-  minusTwoDays = this.getLastDayOfPreviousMonth() - 2;
-  minusOneDays = this.getLastDayOfPreviousMonth() - 1;
-  zeroDays = this.getLastDayOfPreviousMonth();
-  previousMonthDates = [this.minusFiveDays, this.minusFourDays, this.minusThreeDays, this.minusTwoDays, this.minusOneDays, this.zeroDays];
-
-  currentDatesOfWeek!: number[];
-  currentWeekNumber = 0;
-  currentDate = this.getDate();
-  displayWeekNumber = 0;
-
-  constructor() { }
-
-  getMonthString(): string {
-    const currentDateObject = new Date();
-    const currentMonthIndex = currentDateObject.getMonth();
-    const currentMonth = this.months[currentMonthIndex];
-
-    return currentMonth;
+  updateWeeksFromCurrent(newWeeksFromCurrent: number): void {
+    this.weeksFromCurrent = newWeeksFromCurrent;
   }
 
-  getMonth(): number {
-    const currentDateObject = new Date();
-    return currentDateObject.getMonth();
+  getWeeksFromCurrent(): number {
+    return this.weeksFromCurrent;
   }
 
-  getDate(): number {
-    const currentDateObject = new Date();
-    return currentDateObject.getDate();
-  }
-
-  setDatesOfWeek(currentDate: number): void {
-    const currentDateObject = new Date();
-    const currentDay = currentDateObject.getDay();
-
-    var firstDayOfWeek = currentDate - currentDay;
-
-    const datesOfWeek: number[] = [];
-
-    if(firstDayOfWeek <= 0) {
-
-      let i = firstDayOfWeek;
-      while(i <= 0) {
-        datesOfWeek.push(this.previousMonthDates[i+5]);
-        i++;
-      }
-
-      const remainingDays = 7 + firstDayOfWeek;
-
-      for(let i = 0; i < remainingDays; i++) {
-        datesOfWeek.push(1 + i);
-      }
-
-    } else {
-
-      for(let i = 0; i < 7; i++) {
-        datesOfWeek.push(firstDayOfWeek + i);
-      }
-
-    }
-
-    for(let i = 0; i < 7; i++) {
-      console.log(datesOfWeek[i]);
-    }
-
-    this.currentDatesOfWeek = datesOfWeek;
-  }
-
-  setPreviousDatesOfWeek(): void {
-    this.displayWeekNumber--;
-    const currentDateObject = new Date();
-    var subtractDays = this.displayWeekNumber*7;
-
-    this.setDatesOfWeek(currentDateObject.getDate() + subtractDays);
-    this.displayWeekNumber--;
-  }
-
-  setNextDatesOfWeek(): void {
-    this.displayWeekNumber++;
-    const currentDateObject = new Date();
-    var addDays = this.displayWeekNumber*7;
-
-    this.setDatesOfWeek(currentDateObject.getDate() + addDays);
-    
-  }
-
-  getCurrentDatesOfWeek(): number[] {
-    return this.currentDatesOfWeek;
-  }
-
-  getLastDayOfPreviousMonth(): number {
-    const currentDateObject = new Date();
-    let year = currentDateObject.getFullYear();
-    let month = currentDateObject.getMonth() - 1;
-
-    if (month < 0) { // Handle January (0)
-      month = 11;
-      year--;
-    }
-
-    const lastDayOfPreviousMonth = new Date(year, month + 1, 0);
-
-    return lastDayOfPreviousMonth.getDate();
-  }
-
-  isCurrentDate(date: number): boolean {
-    if(this.displayWeekNumber === 0 && this.getDate() === date) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  */
 }
