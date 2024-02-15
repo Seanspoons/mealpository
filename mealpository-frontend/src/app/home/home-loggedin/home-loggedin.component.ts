@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../authentication/services/authentication.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-home-loggedin',
@@ -12,14 +13,21 @@ import { UserService } from '../../services/user.service';
 export class HomeLoggedinComponent implements OnInit {
 
   firstName!: string;
+  currentMonth!: string;
+  currentYear!: string;
+  datesOfWeek!: string[];
+  weeksFromCurrent = 0;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
+    private dateService: DateService,
     private router: Router,
     ) {}
 
   ngOnInit(): void {
+
+    // Get user's first name
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
         //console.log("API Response: ", response);
@@ -32,6 +40,14 @@ export class HomeLoggedinComponent implements OnInit {
         userSubscription.unsubscribe();
       }
     });
+
+    // Get days of the week
+    this.dateService.updateDatesOfWeek();
+    this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
+
+    // Get current month and year
+    this.currentMonth = this.dateService.getCurrentMonth();
+    this.currentYear = this.dateService.getCurrentYear();    
   }
 
   onLogoutClick(): void {
@@ -47,5 +63,42 @@ export class HomeLoggedinComponent implements OnInit {
         console.error('Login error:', error);
       }
     );
+  }
+
+  isCurrentDate(date: string): boolean {
+    const currentDateObject = new Date();
+    if(this.weeksFromCurrent === 0 && parseInt(date, 10) === currentDateObject.getDate()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  onCalendarLeftClick() {
+    this.weeksFromCurrent--;
+    this.dateService.goBackWeek(this.weeksFromCurrent);
+    this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
+    this.currentMonth = this.dateService.getCurrentMonth();
+    this.currentYear = this.dateService.getCurrentYear();
+  }
+
+  onCalendarRightClick() {
+    this.weeksFromCurrent++;
+    this.dateService.goForwardWeek(this.weeksFromCurrent);
+    this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
+    this.currentMonth = this.dateService.getCurrentMonth();
+    this.currentYear = this.dateService.getCurrentYear();
+  }
+
+  returnToCurrentWeek(): void {
+    if(this.weeksFromCurrent < 0) {
+      this.dateService.goForwardWeek(0);
+    } else if(this.weeksFromCurrent > 0) {
+      this.dateService.goBackWeek(0);
+    } else {
+      
+    }
+    this.currentMonth = this.dateService.getCurrentMonth();
+    this.currentYear = this.dateService.getCurrentYear();
   }
 }

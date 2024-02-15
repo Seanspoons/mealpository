@@ -21,53 +21,54 @@
         <div class="w-full px-5 lg:mt-16 lg:mb-8 flex flex-col items-center lg:w-11/12">
 
             <div class=" mt-8 flex flex-row w-4/6 justify-center">
-                <h2 class="w-full max-w-[1376px] text-2xl text-center lg:text-center sm:text-3xl lg:text-4xl">january</h2>
+                <h2 class="w-full max-w-[1376px] text-2xl text-center lg:text-center sm:text-3xl lg:text-4xl">{{ currentMonth }} {{ currentYear }}</h2>
             </div>
 
             <div class="w-full lg:mb-8 flex flex-col items-center lg:w-11/12 lg:flex-row lg:justify-center">
 
-                <button class="bg-white hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mt-4 lg:hidden">↑</button>
-                <button class="bg-white hidden hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mr-2 mt-4 lg:block lg:mt-0">←</button>
+                <button (click)="onCalendarLeftClick()" class="bg-white hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mt-4 lg:hidden">↑</button>
+                <button (click)="onCalendarLeftClick()" class="bg-white hidden hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mr-2 mt-4 lg:block lg:mt-0">←</button>
 
                 <div class="bg-white border-2 border-gray-400 rounded-lg p-1 w-full max-w-[675px] max-h-[600px] mt-2 flex flex-col items-center lg:flex-row lg:mt-3 lg:h-48 lg:w-full lg:max-w-[1376px]">
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">21</h3></div>
+
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[0]), 'border-gray-600': isCurrentDate(datesOfWeek[0])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[0] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">22</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[1]), 'border-gray-600': isCurrentDate(datesOfWeek[1])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[1] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">23</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[2]), 'border-gray-600': isCurrentDate(datesOfWeek[2])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[2] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">24</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[3]), 'border-gray-600': isCurrentDate(datesOfWeek[3])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[3] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">25</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[4]), 'border-gray-600': isCurrentDate(datesOfWeek[4])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[4] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">26</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[5]), 'border-gray-600': isCurrentDate(datesOfWeek[5])}" class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[5] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
 
-                    <div class="bg-white border border-gray-400 w-full h-44 rounded-md flex flex-col p-3 lg:max-w-48">
-                        <!-- date --><div><h3 class="text-2xl">27</h3></div>
+                    <div [ngClass]="{'border-2': isCurrentDate(datesOfWeek[6]), 'border-gray-600': isCurrentDate(datesOfWeek[6])}" class="bg-white border border-gray-400 w-full h-44 rounded-md flex flex-col p-3 lg:max-w-48">
+                        <!-- date --><div><h3 class="text-2xl">{{ datesOfWeek[6] }}</h3></div>
                         <!-- content --><div></div>
                     </div>
                 </div>
 
-                <button class="bg-white hidden hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center ml-2 mt-4 lg:block lg:mt-0">→</button>
-                <button class="bg-white hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mt-4 lg:hidden">↓</button>
+                <button (click)="onCalendarRightClick()" class="bg-white hidden hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center ml-2 mt-4 lg:block lg:mt-0">→</button>
+                <button (click)="onCalendarRightClick()" class="bg-white hover:bg-597385 border-2 border-gray-400 text-black text-lg rounded-full w-9 h-9 text-center mt-4 lg:hidden">↓</button>
             </div>
         </div>
  </div>
