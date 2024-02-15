@@ -5,7 +5,9 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ShoppingListComponent,
+  ],
   imports: [
     CommonModule,
     ShoppingListComponent,

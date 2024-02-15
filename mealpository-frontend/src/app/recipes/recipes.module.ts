@@ -5,10 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    RecipesComponent,
+  ],
   imports: [
     CommonModule,
-    RecipesComponent,
     ReactiveFormsModule,
   ]
 })

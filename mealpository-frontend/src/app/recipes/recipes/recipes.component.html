@@ -2,21 +2,39 @@
 
     <h1 class="text-3xl lg:text-4xl">recipes</h1>
 
-    <div class="w-full lg:mb-8 flex flex-col items-center lg:w-11/12 lg:flex-row lg:justify-center bg-blue-500">
+    <div class="w-full mt-4 lg:mb-8 flex flex-col items-center lg:w-11/12 lg:flex-row lg:justify-center">
 
-        <form [formGroup]="searchForm" class="w-full" (ngSubmit)="onSubmit()">
+        <div class="flex flex-row w-full">
+
+            <form [formGroup]="searchForm" class="w-full" (ngSubmit)="onSubmit()">
             
-            <input 
-                id="search"
-                formControlName="search"
-                type="text"
-                placeholder="search"
-                class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14"
-            >
+                <input 
+                    id="search"
+                    formControlName="search"
+                    type="text"
+                    placeholder="search"
+                    class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14"
+                >
+    
+            </form>
 
-        </form>
+            <button type="submit" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md ml-3 w-16 h-12 text-center md:h-14">go</button>
 
-        <div class="bg-white border-2 border-gray-400 rounded-lg p-1 w-full max-w-[675px] max-h-[600px] mt-2 flex flex-col items-center lg:flex-row lg:mt-3 lg:h-48 lg:w-full lg:max-w-[1376px]">
+        </div>
+
+        <div class="flex flex-row w-full mt-4 h-12 md:h-14 border-2 border-d9d9d9 rounded-md">
+            <button (click)="toggleFilter('all')" [class.active]="isAllActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white rounded-l-md text-base border-r-2"> all </button>
+            <button (click)="toggleFilter('categories')" [class.active]="isCategoriesActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white text-base border-r-2 hidden sm:block"> categories </button>
+            <button (click)="toggleFilter('favourites')" [class.active]="isFavouritesActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white text-base border-r-2 hidden sm:block"> favourites </button>
+            <button (click)="toggleFilter('recents')" [class.active]="isRecentsActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white rounded-r-md text-base hidden sm:block"> recents </button>
+
+            <button (click)="toggleFilter('categories')" [class.active]="isCategoriesActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img class="w-7 h-7 object-cover" src="../assets/img/categories-icon.png" alt="categories icon"> </button>
+            <button (click)="toggleFilter('favourites')" [class.active]="isFavouritesActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img class="w-8 h-7 object-cover" src="../assets/img/heart-icon.png" alt="heart icon"> </button>
+            <button (click)="toggleFilter('recents')" [class.active]="isRecentsActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base object-cover sm:hidden"> <img class="w-7 h-7 object-cover" src="../assets/img/recent-icon.png" alt="recent icon"> </button>
+        </div>
+        
+
+        <div class="bg-white border-2 border-gray-400 rounded-lg p-1 w-full max-w-[675px] max-h-[600px] mt-5 flex flex-col items-center lg:flex-row lg:mt-3 lg:h-48 lg:w-full lg:max-w-[1376px]">
 
             <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
                 <!-- date --><div><h3 class="text-2xl">21</h3></div>

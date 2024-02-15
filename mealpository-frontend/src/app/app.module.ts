@@ -10,6 +10,7 @@ import routes from './app.routes';
 import { HomeModule } from './home/home.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RecipesModule } from './recipes/recipes.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeModule,
     AuthenticationModule,
     HttpClientModule,
+    RecipesModule,
   ],
   bootstrap: [AppComponent]
 })
