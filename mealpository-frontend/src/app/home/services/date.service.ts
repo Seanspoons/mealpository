@@ -10,9 +10,15 @@ export class DateService {
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   currentDatesOfWeek: string[] = [];
+  conflictingYears!: string[];
+  conflictingMonths!: string[];
   currentMonth!: string;
   currentYear!: string;
+  currentMonthAndYear!: string;
   weeksFromCurrent = 0; // Initalize as 0 as we are on the current week
+  monthDifferent = false;
+  yearDifferent = false;
+  monthAndYearDifferent = false;
 
   constructor() {}
 
@@ -26,6 +32,15 @@ export class DateService {
 
       this.compareMonthIndex(endOfWeek, startOfWeek); // Compare months to see if week spans days in 1 or 2 months
       this.compareYears(endOfWeek, startOfWeek) // Compare years to see if week spans days in 1 or 2 years
+      if(this.monthDifferent && this.yearDifferent) { // If both the month and the year different
+        this.monthAndYearDifferent = true; // then set the flag indicating such as true
+      } else {
+        this.monthAndYearDifferent = false;
+      }
+
+      if(this.monthAndYearDifferent) { // If both the month and year are different
+        this.currentMonthAndYear = this.conflictingMonths[0] + ' ' + this.conflictingYears[0] + ' / ' + this.conflictingMonths[1] + ' ' + this.conflictingYears[1]; // use a different format to display the month and year
+      }
 
       for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
         this.currentDatesOfWeek.push(startOfWeek.clone().add(i, 'days').format('D'));
@@ -47,6 +62,15 @@ export class DateService {
 
     this.compareMonthIndex(endOfPreviousWeek, startOfPreviousWeek); // Compare months to see if week spans days in 1 or 2 months
     this.compareYears(endOfPreviousWeek, startOfPreviousWeek); // Compare years to see if week spans days in 1 or 2 years
+    if(this.monthDifferent && this.yearDifferent) { // If both the month and the year different
+      this.monthAndYearDifferent = true; // then set the flag indicating such as true
+    } else {
+      this.monthAndYearDifferent = false;
+    }
+
+    if(this.monthAndYearDifferent) { // If both the month and year are different
+      this.currentMonthAndYear = this.conflictingMonths[0] + ' ' + this.conflictingYears[0] + ' / ' + this.conflictingMonths[1] + ' ' + this.conflictingYears[1]; // use a different format to display the month and year
+    }
 
     for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
       this.currentDatesOfWeek.push(startOfPreviousWeek.clone().add(i, 'days').format('D'));
@@ -61,6 +85,15 @@ export class DateService {
 
     this.compareMonthIndex(endOfNextWeek, startOfNextWeek); // Compare months to see if week spans days in 1 or 2 months
     this.compareYears(endOfNextWeek, startOfNextWeek); // Compare years to see if week spans days in 1 or 2 years
+    if(this.monthDifferent && this.yearDifferent) { // If both the month and the year different
+      this.monthAndYearDifferent = true; // then set the flag indicating such as true
+    } else {
+      this.monthAndYearDifferent = false;
+    }
+
+    if(this.monthAndYearDifferent) { // If both the month and year are different
+      this.currentMonthAndYear = this.conflictingMonths[0] + ' ' + this.conflictingYears[0] + ' / ' + this.conflictingMonths[1] + ' ' + this.conflictingYears[1]; // use a different format to display the month and year
+    }
 
     for(let i = 0; i < 7; i++) { // Push the days of the week onto array that we are using to keep current days of the week
       this.currentDatesOfWeek.push(startOfNextWeek.clone().add(i, 'days').format('D'));
@@ -68,25 +101,35 @@ export class DateService {
   }
 
   compareMonthIndex(endOfWeek: moment.Moment, startOfWeek: moment.Moment): void {
+    this.conflictingMonths = [];
     const currentMonthIndexEnd = endOfWeek.clone().month(); // Get index of month from the end of the week
     const currentMonthIndexStart = startOfWeek.clone().month(); // and get index of the month from the start of the week
 
     if(currentMonthIndexEnd === currentMonthIndexStart) { // If the month is the same at the start and end of the week
+      this.monthDifferent = false;
       this.currentMonth = this.months[currentMonthIndexStart]; // then the current month is the index at the start (or the end as they are the same)
     } else { // Otherwise the week spans days in both months
+      this.monthDifferent = true;
       this.currentMonth = this.months[currentMonthIndexStart] + ' / ' + this.months[currentMonthIndexEnd]; // then take both months and store them to display
+      this.conflictingMonths.push(this.months[currentMonthIndexStart]); // Store the months in an array for access later
+      this.conflictingMonths.push(this.months[currentMonthIndexEnd]);
     }
   }
 
   compareYears(endOfWeek: moment.Moment, startOfWeek: moment.Moment): void {
+    this.conflictingYears = [];
     const currentYearStart = startOfWeek.clone().format('YYYY'); // Get year at beginning of week
     const currentYearEnd = endOfWeek.clone().format('YYYY'); // and get year at end of week
     // We do this in case a week spans days in two years which could happen at the end of December into January
 
     if(currentYearStart === currentYearEnd) { // If the year is the same at the start and end of the week
+      this.yearDifferent = false;
       this.currentYear = currentYearStart; // then the current year is the year the start (or at the end as they are the same)
     } else { // Otherwise the week spans days in both years
+      this.yearDifferent = true;
       this.currentYear = currentYearStart + ' / ' + currentYearEnd; // then take both years and store them to display
+      this.conflictingYears.push(currentYearStart); // Store the years in an array for access later
+      this.conflictingYears.push(currentYearEnd);
     }
   }
 
@@ -108,6 +151,14 @@ export class DateService {
 
   getWeeksFromCurrent(): number {
     return this.weeksFromCurrent;
+  }
+
+  getMonthAndYearDifferent(): boolean {
+    return this.monthAndYearDifferent;
+  }
+
+  getCurrentMonthAndYear(): string {
+    return this.currentMonthAndYear;
   }
 
 }

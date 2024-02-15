@@ -15,20 +15,19 @@ export class HomeLoggedinComponent implements OnInit {
   firstName!: string;
   currentMonth!: string;
   currentYear!: string;
+  currentMonthAndYear!: string;
   datesOfWeek!: string[];
   weeksFromCurrent!: number;
+  monthAndYearDifferent!: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private dateService: DateService,
     private router: Router,
-    ) {
-      console.log("Home-LoggedIn Constructor");
-    }
+    ) {}
 
   ngOnInit(): void {
-    console.log("Home-LoggedIn OnInit");
     // Get user's first name
     const userSubscription = this.userService.getUserInfo().subscribe({
       next: (response) => { // Handle successful token verification
@@ -48,8 +47,10 @@ export class HomeLoggedinComponent implements OnInit {
     this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
 
     // Get current month and year
+    this.monthAndYearDifferent = this.dateService.getMonthAndYearDifferent();
     this.currentMonth = this.dateService.getCurrentMonth();
     this.currentYear = this.dateService.getCurrentYear();
+    this.currentMonthAndYear = this.dateService.getCurrentMonthAndYear();
     
     // Update weeks from current
     this.weeksFromCurrent = this.dateService.getWeeksFromCurrent();
@@ -86,6 +87,8 @@ export class HomeLoggedinComponent implements OnInit {
     this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
     this.currentMonth = this.dateService.getCurrentMonth();
     this.currentYear = this.dateService.getCurrentYear();
+    this.monthAndYearDifferent = this.dateService.getMonthAndYearDifferent();
+    this.currentMonthAndYear = this.dateService.getCurrentMonthAndYear();
   }
 
   onCalendarRightClick() {
@@ -95,6 +98,8 @@ export class HomeLoggedinComponent implements OnInit {
     this.datesOfWeek = this.dateService.getCurrentDatesOfWeek();
     this.currentMonth = this.dateService.getCurrentMonth();
     this.currentYear = this.dateService.getCurrentYear();
+    this.monthAndYearDifferent = this.dateService.getMonthAndYearDifferent();
+    this.currentMonthAndYear = this.dateService.getCurrentMonthAndYear();
   }
 
   returnToCurrentWeek(): void {

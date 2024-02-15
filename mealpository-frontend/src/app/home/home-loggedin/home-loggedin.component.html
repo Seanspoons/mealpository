@@ -21,7 +21,8 @@
         <div class="w-full px-5 lg:mt-16 lg:mb-8 flex flex-col items-center lg:w-11/12">
 
             <div class=" mt-8 flex flex-row w-4/6 justify-center">
-                <h2 class="w-full max-w-[1376px] text-2xl text-center lg:text-center sm:text-3xl lg:text-4xl">{{ currentMonth }} {{ currentYear }}</h2>
+                <h2 *ngIf="!monthAndYearDifferent" class="w-full max-w-[1376px] text-2xl text-center lg:text-center sm:text-3xl lg:text-4xl">{{ currentMonth }} {{ currentYear }}</h2>
+                <h2 *ngIf="monthAndYearDifferent" class="w-full max-w-[1376px] text-2xl text-center lg:text-center sm:text-3xl lg:text-4xl">{{ currentMonthAndYear }}</h2>
             </div>
 
             <div class="w-full lg:mb-8 flex flex-col items-center lg:w-11/12 lg:flex-row lg:justify-center">
