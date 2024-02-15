@@ -86,6 +86,11 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('recipes'); // Need to make recipes component
     }
 
+    else if(type === 'shopping-list') {
+      this.menuToggled = false;
+      this.router.navigateByUrl('shopping-list');
+    }
+
     else if(type === 'calendar') {
       this.menuToggled = false;
       this.router.navigateByUrl('calendar'); // Need to make calendar component
