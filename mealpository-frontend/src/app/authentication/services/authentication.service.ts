@@ -25,13 +25,15 @@ export class AuthenticationService {
    }
   
   login(email: string, password: string): Observable<any> {
-    const loginURL = 'http://127.0.0.1:8000/authentication/login';
+    //const loginURL = 'http://127.0.0.1:8000/authentication/login';
+    const loginURL = 'http://192.168.1.66:8000/authentication/login';
     const requestBody = { email, password };
     return this.http.post(loginURL, requestBody);
   }
 
   logout(token: string): Observable<any> {
-    const logoutURL = 'http://127.0.0.1:8000/authentication/logout';
+    //const logoutURL = 'http://127.0.0.1:8000/authentication/logout';
+    const logoutURL = 'http://192.168.1.66:8000/authentication/logout';
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -43,13 +45,15 @@ export class AuthenticationService {
   }
 
   signup(first_name: string, email: string, password: string): Observable<any> {
-    const signupURL = 'http://127.0.0.1:8000/authentication/signup';
+    //const signupURL = 'http://127.0.0.1:8000/authentication/signup';
+    const signupURL = 'http://192.168.1.66:8000/authentication/signup';
     const requestBody = { first_name, email, password };
     return this.http.post(signupURL, requestBody);
   }
 
   verifyToken(authToken: string): Observable<any> {
-    const verifyURL = 'http://127.0.0.1:8000/authentication/test_token'
+    //const verifyURL = 'http://127.0.0.1:8000/authentication/test_token'
+    const verifyURL = 'http://192.168.1.66:8000/authentication/test_token'
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + authToken
     });

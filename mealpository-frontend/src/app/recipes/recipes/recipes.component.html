@@ -23,18 +23,33 @@
         </div>
 
         <div class="flex flex-row w-full mt-4 h-12 md:h-14 border-2 border-d9d9d9 rounded-md">
-            <button (click)="toggleFilter('all')" [class.active]="isAllActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white rounded-l-md text-base border-r-2"> all </button>
-            <button (click)="toggleFilter('categories')" [class.active]="isCategoriesActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white text-base border-r-2 hidden sm:block"> categories </button>
-            <button (click)="toggleFilter('favourites')" [class.active]="isFavouritesActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white text-base border-r-2 hidden sm:block"> favourites </button>
-            <button (click)="toggleFilter('recents')" [class.active]="isRecentsActive" class="w-1/4 active:bg-013a63 active:border-black active:text-white rounded-r-md text-base hidden sm:block"> recents </button>
+            <button (click)="toggleFilter('all')" [ngClass]="{'bg-013a63': isAllActive, 'text-white': isAllActive}" class="w-1/4 active:bg-013a63 active:text-white rounded-l-md text-base border-r-2"> all </button>
+            <button (click)="toggleFilter('categories')" [ngClass]="{'bg-013a63': isCategoriesActive, 'text-white': isCategoriesActive}" class="w-1/4 active:bg-013a63 active:text-white text-base border-r-2 hidden sm:block"> categories </button>
+            <button (click)="toggleFilter('favourites')" [ngClass]="{'bg-013a63': isFavouritesActive, 'text-white': isFavouritesActive}" class="w-1/4 active:bg-013a63 active:text-white text-base border-r-2 hidden sm:block"> favourites </button>
+            <button (click)="toggleFilter('recents')" [ngClass]="{'bg-013a63': isRecentsActive, 'text-white': isRecentsActive}" class="w-1/4 active:bg-013a63 active:text-white rounded-r-md text-base hidden sm:block"> recents </button>
 
-            <button (click)="toggleFilter('categories')" [class.active]="isCategoriesActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img class="w-7 h-7 object-cover" src="../assets/img/categories-icon.png" alt="categories icon"> </button>
-            <button (click)="toggleFilter('favourites')" [class.active]="isFavouritesActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img class="w-8 h-7 object-cover" src="../assets/img/heart-icon.png" alt="heart icon"> </button>
-            <button (click)="toggleFilter('recents')" [class.active]="isRecentsActive" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base object-cover sm:hidden"> <img class="w-7 h-7 object-cover" src="../assets/img/recent-icon.png" alt="recent icon"> </button>
+            <button (click)="toggleFilter('categories')" [ngClass]="{'bg-013a63': isCategoriesActive, 'text-white': isCategoriesActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img *ngIf="!isCategoriesActive" class="w-7 h-7 object-cover" src="../assets/img/categories-icon.png" alt="categories icon black"> <img *ngIf="isCategoriesActive" class="w-7 h-7 object-cover" src="../assets/img/categories-icon-white.png" alt="categories icon white"> </button>
+            <button (click)="toggleFilter('favourites')" [ngClass]="{'bg-013a63': isFavouritesActive, 'text-white': isFavouritesActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img *ngIf="!isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon.png" alt="heart icon black"> <img *ngIf="isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon-white.png" alt="heart icon white"> </button>
+            <button (click)="toggleFilter('recents')" [ngClass]="{'bg-013a63': isRecentsActive, 'text-white': isRecentsActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base object-cover sm:hidden"> <img *ngIf="!isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon.png" alt="recent icon black"> <img *ngIf="isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon-white.png" alt="recent icon black"> </button>
         </div>
         
 
         <div class="bg-white border-2 border-gray-400 rounded-lg p-1 w-full max-w-[675px] max-h-[600px] mt-5 flex flex-col items-center lg:flex-row lg:mt-3 lg:h-48 lg:w-full lg:max-w-[1376px]">
+
+            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                <!-- date --><div><h3 class="text-2xl">21</h3></div>
+                <!-- content --><div></div>
+            </div>
+
+            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                <!-- date --><div><h3 class="text-2xl">21</h3></div>
+                <!-- content --><div></div>
+            </div>
+
+            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
+                <!-- date --><div><h3 class="text-2xl">21</h3></div>
+                <!-- content --><div></div>
+            </div>
 
             <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
                 <!-- date --><div><h3 class="text-2xl">21</h3></div>
@@ -46,3 +61,13 @@
     </div>
 
 </div>
+
+<nav class="fixed bottom-0 z-20 bg-[#FFFFFF] items-center h-16 w-full border-2 border-t-black shadow-md flex flex-row justify-center md:h-16 lg:h-20">
+
+    <button (click)="goBackPage()" class="w-8 h-8 mr-6 rounded-full border-2 border-black flex flex-row justify-center items-center active:bg-0064ac active:text-white">←</button>
+    <button (click)="goToPage(buttonOneValue)" [ngClass]="{'bg-0064ac': getIsPageNumberButtonActive(buttonOneValue), 'text-white': getIsPageNumberButtonActive(buttonOneValue)}" class="w-8 h-8 mr-2 rounded-full border-2 border-black flex flex-row justify-center items-center">{{ buttonOneValue }}</button>
+    <button (click)="goToPage(buttonTwoValue)" [ngClass]="{'bg-0064ac': getIsPageNumberButtonActive(buttonTwoValue), 'text-white': getIsPageNumberButtonActive(buttonTwoValue)}" class="w-8 h-8 mr-2 rounded-full border-2 border-black flex flex-row justify-center items-center">{{ buttonTwoValue }}</button>
+    <button (click)="goToPage(buttonThreeValue)" [ngClass]="{'bg-0064ac': getIsPageNumberButtonActive(buttonThreeValue), 'text-white': getIsPageNumberButtonActive(buttonThreeValue)}" class="w-8 h-8 rounded-full border-2 border-black flex flex-row justify-center items-center">{{ buttonThreeValue }}</button>
+    <button (click)="goForwardPage()" class="w-8 h-8 ml-6 rounded-full border-2 border-black flex flex-row justify-center items-center active:bg-0064ac active:text-white">→</button>
+
+</nav>

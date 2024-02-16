@@ -14,7 +14,8 @@ export class UserService {
   ) {}
 
   getUserInfo(): Observable<any> {
-    const userInfoURL = 'http://127.0.0.1:8000/authentication/user_info';
+    //const userInfoURL = 'http://127.0.0.1:8000/authentication/user_info';
+    const userInfoURL = 'http://192.168.1.66:8000/authentication/user_info';
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + this.authenticationService.getToken()
     });
