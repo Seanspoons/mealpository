@@ -9,6 +9,12 @@ import { RecipesService } from '../services/recipes.service';
   styleUrl: './recipes.component.css'
 })
 export class RecipesComponent implements OnInit {
+
+  /*
+  - Display 6 items per page on mb
+  - Display 9 items per page on md
+  - Display 12 items per page on lg and above 
+  */
   
   searchForm: FormGroup;
   isAllActive!: boolean;

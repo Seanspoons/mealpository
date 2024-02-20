@@ -2,18 +2,18 @@
 
     <h1 class="text-3xl lg:text-4xl">recipes</h1>
 
-    <div class="w-full mt-4 lg:mb-8 flex flex-col items-center lg:w-11/12 lg:flex-row lg:justify-center">
+    <div class="w-full mt-4 lg:mb-8 flex flex-col items-center">
 
-        <div class="flex flex-row w-full">
+        <div class="flex flex-row w-full justify-center">
 
-            <form [formGroup]="searchForm" class="w-full" (ngSubmit)="onSubmit()">
+            <form [formGroup]="searchForm" class="w-full max-w-[500px]" (ngSubmit)="onSubmit()">
             
                 <input 
                     id="search"
                     formControlName="search"
                     type="text"
                     placeholder="search"
-                    class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14"
+                    class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14 max-w-[500px]"
                 >
     
             </form>
@@ -22,7 +22,7 @@
 
         </div>
 
-        <div class="flex flex-row w-full mt-4 h-12 md:h-14 border-2 border-d9d9d9 rounded-md">
+        <div class="flex flex-row w-full mt-4 h-12 md:h-14 border-2 border-d9d9d9 rounded-md max-w-[800px]">
             <button (click)="toggleFilter('all')" [ngClass]="{'bg-013a63': isAllActive, 'text-white': isAllActive}" class="w-1/4 active:bg-013a63 active:text-white rounded-l-md text-base border-r-2"> all </button>
             <button (click)="toggleFilter('categories')" [ngClass]="{'bg-013a63': isCategoriesActive, 'text-white': isCategoriesActive}" class="w-1/4 active:bg-013a63 active:text-white text-base border-r-2 hidden sm:block"> categories </button>
             <button (click)="toggleFilter('favourites')" [ngClass]="{'bg-013a63': isFavouritesActive, 'text-white': isFavouritesActive}" class="w-1/4 active:bg-013a63 active:text-white text-base border-r-2 hidden sm:block"> favourites </button>
@@ -32,28 +32,52 @@
             <button (click)="toggleFilter('favourites')" [ngClass]="{'bg-013a63': isFavouritesActive, 'text-white': isFavouritesActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img *ngIf="!isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon.png" alt="heart icon black"> <img *ngIf="isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon-white.png" alt="heart icon white"> </button>
             <button (click)="toggleFilter('recents')" [ngClass]="{'bg-013a63': isRecentsActive, 'text-white': isRecentsActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base object-cover sm:hidden"> <img *ngIf="!isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon.png" alt="recent icon black"> <img *ngIf="isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon-white.png" alt="recent icon black"> </button>
         </div>
-        
 
-        <div class="bg-white border-2 border-gray-400 rounded-lg p-1 w-full max-w-[675px] max-h-[600px] mt-5 flex flex-col items-center lg:flex-row lg:mt-3 lg:h-48 lg:w-full lg:max-w-[1376px]">
+        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">
 
-            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                <!-- date --><div><h3 class="text-2xl">21</h3></div>
-                <!-- content --><div></div>
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
             </div>
 
-            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                <!-- date --><div><h3 class="text-2xl">21</h3></div>
-                <!-- content --><div></div>
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
             </div>
 
-            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                <!-- date --><div><h3 class="text-2xl">21</h3></div>
-                <!-- content --><div></div>
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
             </div>
 
-            <div  class="bg-white border border-gray-400 w-full h-44 rounded-md mb-1 flex flex-col p-3 lg:mb-0 lg:mr-1 lg:max-w-48">
-                <!-- date --><div><h3 class="text-2xl">21</h3></div>
-                <!-- content --><div></div>
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
+            </div>
+
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
+            </div>
+
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
+            </div>
+
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
+            </div>
+
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
+            </div>
+
+            <div class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md sm:w-44 sm:h-44 lg:w-52 lg:h-52">
+                    
+                <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left justify-center text-white px-4"> pizza </p>
             </div>
 
         </div>
