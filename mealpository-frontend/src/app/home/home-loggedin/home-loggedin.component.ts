@@ -71,6 +71,10 @@ export class HomeLoggedinComponent implements OnInit {
     );
   }
 
+  onRecipesClick(): void {
+    this.router.navigateByUrl('recipes');
+  }
+
   isCurrentDate(date: string): boolean {
     const currentDateObject = new Date();
     if(this.weeksFromCurrent === 0 && parseInt(date, 10) === currentDateObject.getDate()) {
