@@ -11,6 +11,8 @@ import { HomeModule } from './home/home.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 @NgModule({
@@ -27,7 +29,11 @@ import { RecipesModule } from './recipes/recipes.module';
     AuthenticationModule,
     HttpClientModule,
     RecipesModule,
+    ShoppingListModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    provideAnimationsAsync('noop')
+  ]
 })
 export class AppModule { }

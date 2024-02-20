@@ -1,1 +1,80 @@
-<p>shopping-list works!</p>
+<div class="w-full pt-16 px-5 mt-12 sm:mt-14 md:mt-16 lg:mt-20 lg:mb-8 flex flex-col items-center lg:w-11/12">
+
+    <h1 class="text-3xl lg:text-4xl">shopping list</h1>
+
+    <div class="w-full mt-4 lg:mb-8 flex flex-col items-center">
+
+        <div class="flex flex-row w-full justify-center">
+            
+            <form [formGroup]="listForm" (ngSubmit)="onSubmit()" class="w-full max-w-[500px]">
+
+                <select
+                    id="list"
+                    formControlName="list"
+                    (change)="submitForm()"
+                    class="px-3 h-12 w-full text-base border border-d9d9d9 rounded-md md:h-14 max-w-[500px]"
+                >
+                    <option value="list-1">List 1</option>
+                </select>
+
+            </form>
+            <button type="submit" class="hidden"></button>
+
+            <button mat-button [matMenuTriggerFor]="menu" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md ml-3 w-32 h-12 text-center 720px:hidden">options</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onEditClick()">edit</button>
+                <button mat-menu-item (click)="onAddClick()">+</button>
+            </mat-menu>
+
+            <button (click)="onEditClick()" class="hidden bg-013a63 hover:bg-597385 text-white text-lg rounded-md ml-3 w-20 h-12 text-center 720px:block md:w-22 md:h-14">edit</button>
+            <button (click)="onAddClick()" class="hidden bg-013a63 hover:bg-597385 text-white text-lg rounded-md ml-3 w-12 h-12 text-center 720px:block md:w-14 md:h-14">+</button>
+
+        </div>
+
+        <div class="flex flex-col items-end w-full max-w-[500px] mb-6">
+            
+            <div *ngIf="bakeryList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Bakery </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="bakeryList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="beveragesList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Beverages </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="beveragesList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="cannedGoodsList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Canned Goods </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="cannedGoodsList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="dairyList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Dairy </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="dairyList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="frozenFoodsList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Frozen Foods </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="frozenFoodsList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="produceList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Produce </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="produceList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="condimentsSaucesList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Condiments & Sauces </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="condimentsSaucesList.length > 0"> <p>Test</p> </div>
+
+            <div *ngIf="otherList.length > 0" class="flex flex-row items-center w-full max-w-[500px] px-4 mt-6 bg-013a63 rounded-md h-12 md:h-14">
+                <h2 class="text-lg text-white"> Other </h2>
+            </div>
+            <div class="flex flex-row items-center px-4 h-10 border-2 border-d9d9d9 rounded-md w-11/12 max-w-[480px] mt-3" *ngIf="otherList.length > 0"> <p>Test</p> </div>
+
+        </div>
+
+    </div>
+
+</div>
