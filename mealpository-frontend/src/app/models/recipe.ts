@@ -1,5 +1,3 @@
-import { IDGenerator } from './id_generator';
-
 class Recipe {
     
     recipe_id: string;
@@ -12,9 +10,9 @@ class Recipe {
     image_url: string;
     recipe_pdf_url: string;
     user_id: string;
-    idGenerator: IDGenerator = new IDGenerator();
 
     constructor (
+        recipe_id: string,
         title: string,
         description: string,
         servings: string,
@@ -25,7 +23,7 @@ class Recipe {
         recipe_pdf_url: string,
         user_id: string
     ) {
-        this.recipe_id = this.idGenerator.generateId();
+        this.recipe_id = recipe_id;
         this.title = title;
         this.description = description;
         this.servings = servings;
