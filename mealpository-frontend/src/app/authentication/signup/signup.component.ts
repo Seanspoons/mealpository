@@ -37,7 +37,7 @@ export class SignupComponent {
         response => {
           console.log('Signed up:', response);
           var authToken = response.token;
-          var user_id = response.user_id;
+          var user_id = response.user.id
           this.handleSignupSuccess(authToken, user_id);
         },
         error => {

@@ -26,28 +26,22 @@ class DatabaseController:
             print('Error establishing connection:', e)
             raise
 
-    def get_user_id(self, email):
+    def create_user(self, user):
         try:
-            sql_query = "SELECT user_id FROM Users WHERE email = ?"
+            sql_query = """
+                INSERT INTO Users (user_id, first_name, sub_status, email)
+                VALUES (?, ?, ?, ?)
+            """
 
-            # Use parameterized query to prevent SQL injection
-            self.cursor.execute(sql_query, (email,))
-            row = self.cursor.fetchone()
-            
-            if row:
-                user_id = row.user_id
-                print("returning ID")
-                return str(user_id)
-            else:
-                print("returning none")
-                return None
+            self.cursor.execute(sql_query, (user.id, user.first_name, 0, user.email))
+            self.cnxn.commit()
     
         except pyodbc.Error as e:
             print('Error executing SQL query:', e)
+            self.cnxn.rollback()
             raise
 
         finally:
-            # Close cursor and connection in a finally block to ensure they're always closed
             if self.cursor:
                 self.cursor.close()
             if self.cnxn:

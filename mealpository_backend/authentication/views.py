@@ -17,11 +17,8 @@ def login(request):
     if not user.check_password(request.data['password']):
         return Response({"detail": "Not found,"}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
-    db_controller = DatabaseController()
-    db_controller.connect()
-    user_id_data = db_controller.get_user_id(user.email)
     serializer = UserSerializer(instance=user)
-    return Response({"token": token.key, "user_id": user_id_data, "user": serializer.data})
+    return Response({"token": token.key, "user": serializer.data})
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -41,6 +38,9 @@ def signup(request):
         user = CustomUser.objects.get(email=request.data['email'])
         user.set_password(request.data['password'])
         user.save()
+        database_controller = DatabaseController()
+        database_controller.connect()
+        database_controller.create_user(user)
         token = Token.objects.create(user=user)
         return Response({"token": token.key, "user": serializer.data})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

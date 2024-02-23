@@ -36,7 +36,7 @@ export class LoginComponent {
       const loginSubscription = this.authenticationService.login(email, password).subscribe({
         next: (response) => { // Handle successful login
           var authToken = response.token;
-          var user_id = response.user_id;
+          var user_id = response.user.id;
   
           const tokenSubscription = this.authenticationService.verifyToken(authToken).subscribe({
             next: (response) => { // Handle successful token verification
