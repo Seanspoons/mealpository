@@ -1,4 +1,4 @@
-<div class="w-full pt-16 px-5 mt-12 sm:mt-14 md:mt-16 lg:mt-20 lg:mb-8 flex flex-col items-center lg:w-11/12">
+<div class="w-full pt-16 px-5 mt-12 sm:mt-14 md:mt-16 lg:mt-20 lg:mb-8 flex flex-col items-center">
 
     <h1 class="text-3xl lg:text-4xl">recipes</h1>
 
@@ -32,6 +32,12 @@
             <button (click)="toggleFilter('categories')" [ngClass]="{'bg-013a63': isCategoriesActive, 'text-white': isCategoriesActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img *ngIf="!isCategoriesActive" class="w-7 h-7 object-cover" src="../assets/img/categories-icon.png" alt="categories icon black"> <img *ngIf="isCategoriesActive" class="w-7 h-7 object-cover" src="../assets/img/categories-icon-white.png" alt="categories icon white"> </button>
             <button (click)="toggleFilter('favourites')" [ngClass]="{'bg-013a63': isFavouritesActive, 'text-white': isFavouritesActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base border-r-2 object-cover sm:hidden"> <img *ngIf="!isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon.png" alt="heart icon black"> <img *ngIf="isFavouritesActive" class="w-8 h-7 object-cover" src="../assets/img/heart-icon-white.png" alt="heart icon white"> </button>
             <button (click)="toggleFilter('recents')" [ngClass]="{'bg-013a63': isRecentsActive, 'text-white': isRecentsActive}" class="flex flex-row justify-center items-center active:bg-013a63 w-1/4 text-base object-cover sm:hidden"> <img *ngIf="!isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon.png" alt="recent icon black"> <img *ngIf="isRecentsActive" class="w-7 h-7 object-cover" src="../assets/img/recent-icon-white.png" alt="recent icon black"> </button>
+        </div>
+
+        <div *ngIf="recipes.length == 0" class="flex flex-col justify-center items-center w-full mt-12 mb-6">
+            <p class="text-center text-lg">you haven't added any recipes</p>
+            <p class="text-center text-lg mt-3">add a recipe to get started</p>
+            <button (click)="onAddClick()" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md mt-3 w-12 h-12 text-center md:w-14 md:h-14">+</button>
         </div>
 
         <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6">

@@ -18,7 +18,7 @@ export class RecipesComponent implements OnInit {
   - Display 12 items per page on lg and above 
   */
   
-  recipes!: Recipe[];
+  recipes: Recipe[] = [];
   searchForm: FormGroup;
   isAllActive!: boolean;
   isCategoriesActive!: boolean;
