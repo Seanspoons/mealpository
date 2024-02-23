@@ -30,7 +30,7 @@ def logout(request):
     except Token.DoesNotExist:
         return Response({"detail": "User is not logged in."}, status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST']) # Need to generate an ID and make new entry in Azure database along with sending that ID back to user
+@api_view(['POST'])
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
