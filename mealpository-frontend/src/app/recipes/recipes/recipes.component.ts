@@ -69,6 +69,10 @@ export class RecipesComponent implements OnInit {
   
   }
 
+  onAddClick(): void {
+
+  }
+
   getIsPageNumberButtonActive(inputPageNumber: number): boolean {
     if(inputPageNumber === this.activePageNumber) {
       return true;
