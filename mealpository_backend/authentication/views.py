@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from authentication.models import CustomUser
+from authentication.database_controller import DatabaseController
 from .serializers import UserSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -16,8 +17,11 @@ def login(request):
     if not user.check_password(request.data['password']):
         return Response({"detail": "Not found,"}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
+    db_controller = DatabaseController()
+    db_controller.connect()
+    user_id_data = db_controller.get_user_id(user.email)
     serializer = UserSerializer(instance=user)
-    return Response({"token": token.key, "user": serializer.data})
+    return Response({"token": token.key, "user_id": user_id_data, "user": serializer.data})
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -29,7 +33,7 @@ def logout(request):
     except Token.DoesNotExist:
         return Response({"detail": "User is not logged in."}, status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST'])
+@api_view(['POST']) # Need to generate an ID and make new entry in Azure database along with sending that ID back to user
 def signup(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():

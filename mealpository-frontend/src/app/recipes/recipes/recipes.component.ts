@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipesService } from '../services/recipes.service';
+import { AuthenticationService } from '../../authentication/services/authentication.service';
+import { Recipe } from '../../models/recipe';
 
 @Component({
   selector: 'app-recipes',
@@ -16,6 +18,7 @@ export class RecipesComponent implements OnInit {
   - Display 12 items per page on lg and above 
   */
   
+  recipes!: Recipe[];
   searchForm: FormGroup;
   isAllActive!: boolean;
   isCategoriesActive!: boolean;
@@ -28,8 +31,24 @@ export class RecipesComponent implements OnInit {
   buttonThreeValue!: number;
 
   constructor(
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private authenticationService: AuthenticationService
   ) {
+    const recipeSubscription = this.recipesService.getRecipes(this.authenticationService.getUserID()).subscribe({
+      next: (response) => {
+        console.log("API Response: ", response);
+        this.recipes = JSON.parse(response.data);
+        if(this.recipes.length > 0) {
+          console.log("populated recipes");
+        }
+      },
+      error: (error) => {
+      },
+      complete: () => {
+        recipeSubscription.unsubscribe();
+      }
+    });
+
     this.searchForm = new FormGroup({ // Add more validators
       search: new FormControl('', Validators.required),
     });

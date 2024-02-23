@@ -64,14 +64,28 @@ export class AuthenticationService {
     return this.cookieService.get('token');
   }
 
+  getUserID(): string {
+    return this.cookieService.get('user_id');
+  }
+
   setToken(authToken: string): void {
     const expirationDate = new Date();
     expirationDate.setTime(expirationDate.getTime() + (2 * 60 * 60 * 1000)); // 2 hours in milliseconds
     this.cookieService.set('token', authToken, expirationDate);
   }
 
+  setUserID(user_id: string): void {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (2 * 60 * 60 * 1000)); // 2 hours in milliseconds
+    this.cookieService.set('user_id', user_id, expirationDate);
+  }
+
   deleteToken(): void {
     this.cookieService.delete('token');
+  }
+
+  deleteUserID(): void {
+    this.cookieService.delete('user_id');
   }
 
   isLoggedIn(): boolean {

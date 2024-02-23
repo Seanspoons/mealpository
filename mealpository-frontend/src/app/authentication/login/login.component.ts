@@ -36,11 +36,12 @@ export class LoginComponent {
       const loginSubscription = this.authenticationService.login(email, password).subscribe({
         next: (response) => { // Handle successful login
           var authToken = response.token;
+          var user_id = response.user_id;
   
           const tokenSubscription = this.authenticationService.verifyToken(authToken).subscribe({
             next: (response) => { // Handle successful token verification
               console.log("API Response: ", response);
-              this.handleLoginSuccess(authToken);
+              this.handleLoginSuccess(authToken, user_id);
             },
             error: (error) => { // Handle error in token verification
               this.handleTokenVerificationError();
@@ -60,11 +61,12 @@ export class LoginComponent {
     }
   }
 
-  handleLoginSuccess(authToken: string): void {
+  handleLoginSuccess(authToken: string, user_id: string): void {
     this.loginError = false;
     this.parsingError = false;
     this.authenticationService.setLoggedIn(true);
     this.authenticationService.setToken(authToken);
+    this.authenticationService.setUserID(user_id);
     this.router.navigateByUrl('home');
   }
 

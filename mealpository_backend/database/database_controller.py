@@ -1,18 +1,20 @@
 import json
-import os
 import pyodbc
-from recipe import Recipe 
+from database.recipe import Recipe 
+from database.secret import Secret
 
 class DatabaseController:
 
     def __init__(self):
+        secret = Secret()
         self.server = 'tcp:host-mealpository.database.windows.net' 
         self.database = 'mealdb'
-        self.username = os.environ.get('SQL_USERNAME')
-        self.password = os.environ.get('SQL_PASSWORD')
+        self.username = secret.getUsername()
+        self.password = secret.getPassword()
         self.driver = '{ODBC Driver 18 for SQL Server}'
         self.cnxn = None
         self.cursor = None
+        self.connect()
 
     def connect(self):
         self.cnxn = pyodbc.connect('DRIVER=' + self.driver + 
@@ -23,11 +25,12 @@ class DatabaseController:
         self.cursor = self.cnxn.cursor()
         print('Connection established')
 
-    def get_recipes(self):
+    def get_recipes(self, user_id):
         try:
-            sql_query = "SELECT * FROM Recipes"
+            sql_query = "SELECT * FROM Recipes WHERE user_id = ?"
+            print("ID IS: " + user_id)
 
-            self.cursor.execute(sql_query) # execute query
+            self.cursor.execute(sql_query, (user_id,)) # execute query
             rows = self.cursor.fetchall()
 
             recipes = []
@@ -42,6 +45,10 @@ class DatabaseController:
     
         except pyodbc.Error as e:
             print('Error connecting to SQL server:', e)
+            raise
 
-        except Exception as ex:
-            print('An error occurred:', ex)
+        finally:
+            if self.cursor:
+                self.cursor.close()
+            if self.cnxn:
+                self.cnxn.close()

@@ -37,7 +37,8 @@ export class SignupComponent {
         response => {
           console.log('Signed up:', response);
           var authToken = response.token;
-          this.handleSignupSuccess(authToken);
+          var user_id = response.user_id;
+          this.handleSignupSuccess(authToken, user_id);
         },
         error => {
           console.error('Login error:', error);
@@ -47,10 +48,11 @@ export class SignupComponent {
     }
   }
 
-  handleSignupSuccess(authToken: string): void {
+  handleSignupSuccess(authToken: string, user_id: string): void {
     this.signupError = false;
     this.authenticationService.setLoggedIn(true);
     this.authenticationService.setToken(authToken);
+    this.authenticationService.setUserID(user_id);
     this.router.navigateByUrl('home');
   }
 
