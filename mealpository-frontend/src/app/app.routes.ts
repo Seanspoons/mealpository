@@ -7,6 +7,8 @@ import { AuthGuard } from './authentication/auth.guard';
 import { RecipesComponent } from './recipes/recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
+import { HelpPageComponent } from './help-page/help-page.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -15,7 +17,9 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] },
     { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
-    { path: 'add-recipe', component: AddRecipeComponent, canActivate: [AuthGuard] }
+    { path: 'add-recipe', component: AddRecipeComponent, canActivate: [AuthGuard] },
+    { path: 'help', component: HelpPageComponent },
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
     
 ];
 
