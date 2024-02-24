@@ -10,6 +10,8 @@ export class Recipe {
     image_url: string;
     recipe_pdf_url: string;
     user_id: string;
+    instructions: string;
+    ingredients: string[];
 
     constructor (
         recipe_id: string,
@@ -21,7 +23,9 @@ export class Recipe {
         total_time: string,
         image_url: string,
         recipe_pdf_url: string,
-        user_id: string
+        user_id: string,
+        instructions: string,
+        ingredients: string[]
     ) {
         this.recipe_id = recipe_id;
         this.title = title;
@@ -33,6 +37,8 @@ export class Recipe {
         this.image_url = image_url;
         this.recipe_pdf_url = recipe_pdf_url;
         this.user_id = user_id;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
     }
 
 }
