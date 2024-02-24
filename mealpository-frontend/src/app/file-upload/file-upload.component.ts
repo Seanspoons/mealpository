@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddRecipeService } from '../recipes/services/add-recipe.service';
 
@@ -10,6 +10,8 @@ import { AddRecipeService } from '../recipes/services/add-recipe.service';
   styleUrl: './file-upload.component.css'
 })
 export class FileUploadComponent {
+
+  @Output() fileProcessed = new EventEmitter<string[]>();
 
   fileSelected: boolean = false;
 
@@ -26,7 +28,21 @@ export class FileUploadComponent {
   }
   
   handleFile(file: File): void {
-    const processedFile = this.addRecipeService.preformOCR(file); // Need to handle the processed file
+    const processedFile = this.addRecipeService.performOCR(file);
+    this.fileProcessed.emit(processedFile);
+    /*
+    const ocrSubscription = this.addRecipeService.performOCR(file).subscribe({
+      next: (processedFile) => {
+        this.fileProcessed.emit(processedFile);
+      },
+      error: (error) => {
+        console.error('Error processing file:', error);
+      },
+      complete: () => {
+        ocrSubscription.unsubscribe();
+      }});
+      */
   }
+
 
 }
