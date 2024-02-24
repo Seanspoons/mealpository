@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipesService } from '../services/recipes.service';
 import { AuthenticationService } from '../../authentication/services/authentication.service';
 import { Recipe } from '../../models/recipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -32,7 +33,8 @@ export class RecipesComponent implements OnInit {
 
   constructor(
     private recipesService: RecipesService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
     const recipeSubscription = this.recipesService.getRecipes(this.authenticationService.getUserID()).subscribe({
       next: (response) => {
@@ -70,7 +72,7 @@ export class RecipesComponent implements OnInit {
   }
 
   onAddClick(): void {
-
+    this.router.navigateByUrl('add-recipe');
   }
 
   getIsPageNumberButtonActive(inputPageNumber: number): boolean {

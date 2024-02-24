@@ -6,6 +6,7 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import { AuthGuard } from './authentication/auth.guard';
 import { RecipesComponent } from './recipes/recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] },
-    { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] }
+    { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
+    { path: 'add-recipe', component: AddRecipeComponent, canActivate: [AuthGuard] }
     
 ];
 
