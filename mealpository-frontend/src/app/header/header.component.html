@@ -15,9 +15,9 @@
       <li><a (click)="onListClick('home')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">home</a></li>
       <li *ngIf="loggedIn"><a (click)="onListClick('recipes')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">recipes</a></li>
       <li *ngIf="loggedIn"><a (click)="onListClick('shopping-list')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">shopping list</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('calendar')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">calendar</a></li>
+      <li *ngIf="loggedIn"><a (click)="onListClick('calendar')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">meal plan</a></li>
       <li><a (click)="onListClick('help')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">help</a></li>
-      <li><a (click)="onListClick('settings')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">settings</a></li>
+      <li *ngIf="loggedIn"><a (click)="onListClick('settings')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">settings</a></li>
       <li *ngIf="loggedIn"><a (click)="onListClick('logout')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">log out</a></li>
       <li *ngIf="!loggedIn"><a (click)="onListClick('login')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">log in</a></li>
     </ul>
