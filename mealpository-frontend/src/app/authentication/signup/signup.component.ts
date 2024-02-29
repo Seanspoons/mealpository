@@ -41,7 +41,7 @@ export class SignupComponent {
           this.handleSignupSuccess(authToken, user_id);
         },
         error => {
-          console.error('Login error:', error);
+          console.error('Signup error:', error);
           this.handleSignupError();
         }
       );
