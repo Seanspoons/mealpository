@@ -147,4 +147,4 @@ TOKEN_EXPIRED_AFTER_SECONDS = 7200  # 2 hours in seconds
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ALLOWED_HOSTS = ['192.168.1.66', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.91', 'localhost']
