@@ -7,7 +7,7 @@ class DatabaseController:
 
     def __init__(self):
         secret = Secret()
-        self.server = 'tcp:host-mealpository.database.windows.net' 
+        self.server = 'tcp:mealpository.database.windows.net' 
         self.database = 'mealdb'
         self.username = secret.getUsername()
         self.password = secret.getPassword()
@@ -38,6 +38,7 @@ class DatabaseController:
                 recipe = Recipe(row.recipe_id, row.title, row.description, row.instructions, row.servings, row.prep_time,
                         row.cook_time, row.total_time, row.image_url, row.user_id, row.file_name)
                 recipes.append(recipe.serialize_self())
+
 
             json_data = json.dumps(recipes)
 
