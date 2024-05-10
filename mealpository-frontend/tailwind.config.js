@@ -39,6 +39,9 @@ module.exports = {
       },
       fontFamily: {
         'sans': ['Istok Web', 'Helvetica'],
+      },
+      blur: {
+        'xs': '1px',
       }
   },
   },

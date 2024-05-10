@@ -4,3 +4,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.bg-image {
+    background-image: url('assets/img/home-background-blur.png');
+}
+  
+@media (min-width: 800px) {
+    .bg-image {
+      background-image: url('assets/img/home-background.png');
+    }
+}
+  
+  
