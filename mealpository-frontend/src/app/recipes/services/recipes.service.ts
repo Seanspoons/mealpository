@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../authentication/services/authentication.service';
+import { Recipe } from '../../models/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class RecipesService {
   isRecentsActive!: boolean;
   isPageNumberButtonActive!: boolean;
   activePageNumber!: number;
+  viewRecipe!: Recipe;
 
   buttonOneValue!: number;
   buttonTwoValue!: number;
@@ -63,6 +65,14 @@ export class RecipesService {
 
    getButtonThreeValue(): number {
     return this.buttonThreeValue;
+   }
+
+   getViewRecipe(): Recipe {
+    return this.viewRecipe;
+   }
+
+   setViewRecipe(recipe: Recipe): void {
+    this.viewRecipe = recipe;
    }
 
    setButtonValues(newButtonOneValue: number, newButtonTwoValue: number, newButtonThreeValue: number) {

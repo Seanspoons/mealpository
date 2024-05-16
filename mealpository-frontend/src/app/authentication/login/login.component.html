@@ -1,69 +1,72 @@
-<div class="z-0 flex flex-col items-center pt-16 pl-6 pr-6 pb-8 mt-12 sm:mt-14 md:mt-16 lg:mt-20 bg-cover bg-center" style="background-image: url('../assets/img/login-background-blur.png');">
+<div class="z-0 h-screen flex flex-col items-center pt-16 pl-6 pr-6 pb-8 mt-12 sm:mt-14 md:mt-16 lg:mt-20 bg-cover bg-center bg-[#F6F6F8]" style="background-image: url('../assets/img/login-background.png');">
 
-    <h1 class="text-3xl lg:text-4xl">log in</h1>
+    <div class="bg-white rounded-lg p-5 shadow-md max-w-[500px] 548px:min-w-[500px]">
+        <h1 class="text-3xl lg:text-4xl text-center">log in</h1>
 
-    <div class="mt-16 w-full flex flex-col items-center max-w-[500px]">
+        <div class="mt-16 w-full flex flex-col items-center">
 
-        <form [formGroup]="loginForm" class="w-full" (ngSubmit)="onSubmit()">
-            
-            <input 
-                id="email"
-                formControlName="email"
-                type="text"
-                placeholder="email"
-                class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14"
-            >
+            <form [formGroup]="loginForm" class="w-full" (ngSubmit)="onSubmit()">
+                
+                <input 
+                    id="email"
+                    formControlName="email"
+                    type="text"
+                    placeholder="email"
+                    class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md md:h-14"
+                >
 
-            <input 
-                id="password"
-                formControlName="password"
-                type="password"
-                placeholder="password"
-                class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md mt-6 md:h-14 md:mt-8"
-            >
+                <input 
+                    id="password"
+                    formControlName="password"
+                    type="password"
+                    placeholder="password"
+                    class="px-3 h-12 w-full text-base placeholder-4e4e4e border border-d9d9d9 rounded-md mt-6 md:h-14 md:mt-8"
+                >
 
-            <div *ngIf="loginError" class="mt-2 md:mt-3">
-                <p class="text-red-600 text-left">the email or password entered was incorrect -- try again</p>
-            </div>
-            <div *ngIf="parsingError" class="mt-2 md:mt-3">
-                <p class="text-red-600 text-left">unable to parse your authentication token -- try again</p>
-            </div>
-            <div class="flex flex-row justify-between mt-3">
-                <div class="flex flex-row mt-2 md:mt-3">
-
-                    <!-- formControlName="staySignedIn" -->
-                    <input
-                        id="staySignedIn"
-                        
-                        class="mr-2 h-full"
-                        type="checkbox"
-                    >
-
-                    <p class="text-base">keep me signed in</p>
+                <div *ngIf="loginError" class="mt-2 md:mt-3">
+                    <p class="text-red-600 text-left">the email or password entered was incorrect -- try again</p>
                 </div>
-                <p class="text-base text-013a63 underline mt-2 md:mt-3">forgot password?</p>
-            </div>
+                <div *ngIf="parsingError" class="mt-2 md:mt-3">
+                    <p class="text-red-600 text-left">unable to parse your authentication token -- try again</p>
+                </div>
+                <div class="flex flex-row justify-between mt-3">
+                    <div class="flex flex-row mt-2 md:mt-3">
 
-            <button type="submit" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-full mt-8 h-12 text-center md:h-14 md:mt-10">log in</button>
+                        <!-- formControlName="staySignedIn" -->
+                        <input
+                            id="staySignedIn"
+                            
+                            class="mr-2 h-full"
+                            type="checkbox"
+                        >
 
-            <div class="flex flex-row justify-center items-center w-full mt-5 md:mt-6">
-                <div class="my-5 border-t border-gray-300 w-1/2"></div>
-                <p class="text-4e4e4e text-sm text-center w-1/12">or</p>
-                <div class="my-5 border-t border-gray-300 w-1/2"></div>
-            </div>
+                        <p class="text-base">keep me signed in</p>
+                    </div>
+                    <p class="text-base text-013a63 underline mt-2 md:mt-3">forgot password?</p>
+                </div>
 
-            <button class="bg-white border border-black hover:bg-597385 text-black text-mb-button rounded-md w-full mt-5 h-10 text-center md:h-12 md:mt-6">Sign in with Google</button>
+                <button type="submit" class="bg-013a63 hover:bg-597385 text-white text-lg rounded-md w-full mt-8 h-12 text-center md:h-14 md:mt-10">log in</button>
 
-            <button class="bg-black hover:bg-597385 text-white text-mb-button rounded-md w-full mt-4 h-10 text-center md:h-12 md:mt-5">Log in with Apple</button>
+                <div class="flex flex-row justify-center items-center w-full mt-5 md:mt-6">
+                    <div class="my-5 border-t border-gray-300 w-1/2"></div>
+                    <p class="text-4e4e4e text-sm text-center w-1/12">or</p>
+                    <div class="my-5 border-t border-gray-300 w-1/2"></div>
+                </div>
 
-            <button class="bg-1877f2 hover:bg-597385 text-white text-mb-button rounded-md w-full mt-4 h-10 text-center md:h-12 md:mt-5">Log in with Facebook</button>
+                <button class="bg-white border border-black hover:bg-597385 text-black text-mb-button rounded-md w-full mt-5 h-10 text-center md:h-12 md:mt-6">Sign in with Google</button>
 
-            <div class="flex flex-row justify-center mt-4 mb-4 md:mt-5 md:mb-5">
-                <p class="text-base mr-4">don't have an account?</p>
-                <a class="text-base underline cursor-pointer" (click)="onSignupClick()">sign up</a>
-            </div>
+                <button class="bg-black hover:bg-597385 text-white text-mb-button rounded-md w-full mt-4 h-10 text-center md:h-12 md:mt-5">Log in with Apple</button>
 
-        </form>
+                <button class="bg-1877f2 hover:bg-597385 text-white text-mb-button rounded-md w-full mt-4 h-10 text-center md:h-12 md:mt-5">Log in with Facebook</button>
 
+                <div class="flex flex-row justify-center mt-4">
+                    <p class="text-base mr-4">don't have an account?</p>
+                    <a class="text-base underline cursor-pointer" (click)="onSignupClick()">sign up</a>
+                </div>
+
+            </form>
+
+        </div>
     </div>
+    
 </div>

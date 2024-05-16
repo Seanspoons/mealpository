@@ -32,6 +32,7 @@ module.exports = {
         '23': '5.75rem',
       },
       screens: {
+        '548px': '548px',
         '720px': '720px',
         'lg-xl': '1075px',
         'xl1730': '1730px',

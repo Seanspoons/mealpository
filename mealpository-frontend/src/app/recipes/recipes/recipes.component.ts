@@ -76,6 +76,7 @@ export class RecipesComponent implements OnInit {
   }
 
   onRecipeClick(recipe: Recipe): void {
+    this.recipesService.setViewRecipe(recipe);
     this.router.navigateByUrl('view-recipe');
   }
 
