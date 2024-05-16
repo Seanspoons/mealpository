@@ -83,7 +83,7 @@ export class RecipesService {
    }
 
    getRecipes(user_id: string): Observable<any> {
-    const verifyURL = 'http://192.168.91.1:8000/database/get_recipes';
+    const verifyURL = 'http://192.168.1.88:8000/database/get_recipes';
     const urlWithParams = `${verifyURL}?user_id=${user_id}`;
     const headers = new HttpHeaders({
       'Authorization': 'Token ' + this.authenticationService.getToken()

@@ -75,6 +75,10 @@ export class RecipesComponent implements OnInit {
     this.router.navigateByUrl('add-recipe');
   }
 
+  onRecipeClick(recipe: Recipe): void {
+    this.router.navigateByUrl('view-recipe');
+  }
+
   getIsPageNumberButtonActive(inputPageNumber: number): boolean {
     if(inputPageNumber === this.activePageNumber) {
       return true;

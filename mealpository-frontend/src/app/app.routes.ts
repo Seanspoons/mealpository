@@ -9,6 +9,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-li
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ViewRecipeComponent } from './recipes/view-recipe/view-recipe.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,7 +20,8 @@ export const routes: Routes = [
     { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
     { path: 'add-recipe', component: AddRecipeComponent, canActivate: [AuthGuard] },
     { path: 'help', component: HelpPageComponent },
-    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: 'view-recipe', component: ViewRecipeComponent, canActivate: [AuthGuard] }
     
 ];
 
