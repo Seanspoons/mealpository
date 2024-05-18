@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
+import { DecimalToFractionPipe } from './decimal-to-fraction.pipe';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
     RecipesComponent,
     AddRecipeComponent,
     ViewRecipeComponent,
+    DecimalToFractionPipe
   ],
   imports: [
     CommonModule,

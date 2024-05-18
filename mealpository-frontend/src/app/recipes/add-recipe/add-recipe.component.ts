@@ -4,6 +4,8 @@ import { Recipe } from '../../models/recipe';
 import { IDGenerator } from '../../models/id_generator';
 import { AuthenticationService } from '../../authentication/services/authentication.service';
 import { RecipesService } from '../services/recipes.service';
+import { Ingredient } from '../../models/ingredient';
+import { AddRecipeService } from '../services/add-recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -17,7 +19,8 @@ export class AddRecipeComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    private addRecipeService: AddRecipeService
   ) {
 
     this.addForm = new FormGroup({ // Add more validators
@@ -44,6 +47,7 @@ export class AddRecipeComponent {
   }
 
   onSubmit(): void {
+    // Get recipe info from form
     const title = this.addForm.get('title')!.value;
     const prepTime = this.addForm.get('prepTime')!.value;
     const cookTime = this.addForm.get('cookTime')!.value;
@@ -56,15 +60,20 @@ export class AddRecipeComponent {
     const instructions = this.addForm.get('instructions')!.value;
     const imageURL = this.addForm.get('imageURL')!.value;
 
-    const idGenerator = new IDGenerator();
-    const newRecipeID = idGenerator.generateId();
+    const idGenerator = new IDGenerator(); // create id generator for use on recipe, ingredients and recipe_ingredients
     const userID = this.authenticationService.getUserID();
+    const newRecipeID = idGenerator.generateId();
+    const ingredientID = idGenerator.generateId();
 
-    /* Need to figure out the data structures to use (Maybe merge Ingredients and RecipeIngredients)
-    const ingredientList = [];
-    const newIngredient = new Ingredient()
-    const newRecipe = new Recipe(newRecipeID, title, description, servings, prepTime, cookTime, totalTime, imageURL, 'null', userID, instructions,);
-    */
+    //const ingredientList = [];
+    //const newIngredient = new Ingredient(ingredientID, ingredient, 'placeholder');
+    
+    // Empty Placeholders
+    const ingredientsList: Ingredient[] = [];
+    
+    //const newRecipe = new Recipe(newRecipeID, title, description, servings, prepTime, cookTime, totalTime, imageURL, userID, instructions, ingredientsList, recipeIngredientsList);
+
+    //this.addRecipeService.uploadRecipe(newRecipe);
   }
 
 }

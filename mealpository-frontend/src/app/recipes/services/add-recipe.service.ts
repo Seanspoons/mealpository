@@ -28,6 +28,12 @@ export class AddRecipeService {
     return ['test', 'testdesc'];
   }
 
+  uploadRecipe(newRecipe: Recipe): Observable<any> {
+    const uploadRecipeURL = 'http://192.168.1.88:8000/database/upload_recipe';
+    const requestBody = {  };
+    return this.http.post(uploadRecipeURL, requestBody);
+  }
+
   setNewRecipe(recipe: Recipe): void {
     this.newRecipe = recipe;
   }
