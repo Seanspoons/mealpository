@@ -68,11 +68,18 @@ export class RecipesService {
    }
 
    getViewRecipe(): Recipe {
-    return this.viewRecipe;
-   }
+      if (!this.viewRecipe) {
+        const storedRecipe = localStorage.getItem('viewRecipe');
+        if (storedRecipe) {
+          this.viewRecipe = JSON.parse(storedRecipe);
+        }
+      }
+      return this.viewRecipe;
+    }
 
    setViewRecipe(recipe: Recipe): void {
     this.viewRecipe = recipe;
+    localStorage.setItem('viewRecipe', JSON.stringify(recipe));
    }
 
    setButtonValues(newButtonOneValue: number, newButtonTwoValue: number, newButtonThreeValue: number) {
