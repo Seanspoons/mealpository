@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../../models/recipe';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { AuthenticationService } from '../../authentication/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AddRecipeService {
   fileSelected: boolean = false;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
   ) { 
     this.hasNewRecipe = false;
   }
@@ -29,9 +31,14 @@ export class AddRecipeService {
   }
 
   uploadRecipe(newRecipe: Recipe): Observable<any> {
+    console.log("Upload Recipe called");
     const uploadRecipeURL = 'http://192.168.1.88:8000/database/upload_recipe';
-    const requestBody = {  };
-    return this.http.post(uploadRecipeURL, requestBody);
+    const requestBody = JSON.stringify(newRecipe);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + this.authenticationService.getToken()
+    });
+    return this.http.post(uploadRecipeURL, requestBody, { headers });
   }
 
   setNewRecipe(recipe: Recipe): void {

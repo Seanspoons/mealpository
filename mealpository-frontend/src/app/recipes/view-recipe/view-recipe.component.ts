@@ -18,6 +18,7 @@ export class ViewRecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipe = this.recipesService.getViewRecipe();
+    console.log(this.recipe.title);
   }
 
 }

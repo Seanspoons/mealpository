@@ -1,4 +1,5 @@
 import { Ingredient } from "./ingredient";
+import { Instruction } from "./instruction";
 
 export class Recipe {
     
@@ -11,8 +12,8 @@ export class Recipe {
     total_time: string;
     image_url: string;
     user_id: string;
-    instructions: string;
     ingredients: Ingredient[];
+    instructions: Instruction[];
 
     constructor (
         recipe_id: string,
@@ -24,8 +25,8 @@ export class Recipe {
         total_time: string,
         image_url: string,
         user_id: string,
-        instructions: string,
         ingredients: Ingredient[],
+        instructions: Instruction[]
     ) {
         this.recipe_id = recipe_id;
         this.title = title;
