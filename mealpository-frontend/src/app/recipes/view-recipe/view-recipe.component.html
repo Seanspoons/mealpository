@@ -34,8 +34,9 @@
 
         <div class="mt-3 flex flex-col">
             <h2 class="text-2xl font-bold lg:text-3xl mb-3">Instructions</h2>
-            <div class="flex flex-row ml-2 mb-2">
-                <p class="lg:text-lg">{{ recipe.instructions }}</p>
+            <div *ngFor="let instruction of recipe.instructions.slice().reverse()" class="flex flex-col ml-2 mb-2">
+                <h2 class="lg:text-lg font-bold">Step {{ instruction.number }}</h2>
+                <p class="lg:text-lg ml-2">{{ instruction.instruction }}</p>
             </div>
         </div>
 
