@@ -6,6 +6,7 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { DecimalToFractionPipe } from './decimal-to-fraction.pipe';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { DecimalToFractionPipe } from './decimal-to-fraction.pipe';
     CommonModule,
     ReactiveFormsModule,
     FileUploadComponent,
+    MatMenuModule
   ]
 })
 export class RecipesModule { }

@@ -100,12 +100,24 @@ export class RecipesService {
    }
 
    getRecipes(user_id: string): Observable<any> {
-    const verifyURL = 'http://192.168.1.88:8000/database/get_recipes';
+    const verifyURL = 'http://192.168.1.67:8000/database/get_recipes';
     const urlWithParams = `${verifyURL}?user_id=${user_id}`;
     const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
       'Authorization': 'Token ' + this.authenticationService.getToken()
     });
     return this.http.get(urlWithParams, { headers });
+   }
+
+   deleteRecipes(recipe_ids: string[], user_id: string): Observable<any> {
+    const deleteURL = 'http://192.168.1.67:8000/database/delete_recipes';
+    const urlWithParams = `${deleteURL}?user_id=${user_id}`;
+    const requestBody = JSON.stringify(recipe_ids);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + this.authenticationService.getToken()
+    });
+    return this.http.post(urlWithParams, requestBody, { headers });
    }
 
 }

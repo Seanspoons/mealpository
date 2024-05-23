@@ -32,7 +32,7 @@ export class AddRecipeService {
 
   uploadRecipe(newRecipe: Recipe): Observable<any> {
     console.log("Upload Recipe called");
-    const uploadRecipeURL = 'http://192.168.1.88:8000/database/upload_recipe';
+    const uploadRecipeURL = 'http://192.168.1.67:8000/database/upload_recipe';
     const requestBody = JSON.stringify(newRecipe);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

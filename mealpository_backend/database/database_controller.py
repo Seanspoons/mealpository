@@ -57,8 +57,10 @@ class DatabaseController:
                     instruction = Instruction(row3.instruction_id, string_number, row3.instruction, row3.recipe_id)
                     instructions.append(instruction.serialize_self())
 
+                sorted_instructions = sorted(instructions, key=lambda x: x['number'])
+
                 recipe = Recipe(row.recipe_id, row.title, row.description, row.servings, row.prep_time,
-                        row.cook_time, row.total_time, row.image_url, row.user_id, row.file_name, ingredients, instructions)
+                        row.cook_time, row.total_time, row.image_url, row.user_id, row.file_name, ingredients, sorted_instructions)
                 recipes.append(recipe.serialize_self())
 
             json_data = json.dumps(recipes)
@@ -97,6 +99,30 @@ class DatabaseController:
             
             self.cnxn.commit()
     
+        except pyodbc.Error as e:
+            print('Error connecting to SQL server:', e)
+            raise
+
+        finally:
+            if self.cursor:
+                self.cursor.close()
+            if self.cnxn:
+                self.cnxn.close()
+
+    def delete_recipes(self, recipe_ids, user_id):
+        try:
+            sql_query1 = "DELETE FROM Ingredients WHERE recipe_id = ?"
+            sql_query2 = "DELETE FROM Instructions WHERE recipe_id = ?"
+            sql_query3 = "DELETE FROM Recipes WHERE recipe_id = ? AND user_id = ?"
+
+            for recipe_id in  recipe_ids:
+                print("Here is the recipe_id: " + recipe_id)
+                self.cursor.execute(sql_query1, (recipe_id,)) # Delete Ingredients associated with current recipe_id
+                self.cursor.execute(sql_query2, (recipe_id,)) # Delete Instructions associated with current recipe_id
+                self.cursor.execute(sql_query3, (recipe_id, user_id,)) # Finally delete the Recipe with current recipe_id
+
+            self.cnxn.commit()
+                
         except pyodbc.Error as e:
             print('Error connecting to SQL server:', e)
             raise

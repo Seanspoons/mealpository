@@ -13,5 +13,4 @@ class Instruction:
             'number': self.number,
             'instruction': self.instruction,
             'recipe_id': self.recipe_id
-
         }

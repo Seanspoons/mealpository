@@ -61,3 +61,19 @@ def upload_recipe(request):
     except Exception as ex:
         print('An error occured:', ex)
         return Response({"detail": "An error occured.", "error": str(ex)}, status=500)
+    
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_recipes(request):
+    try:
+        print("HERE")
+        user_id = request.query_params.get('user_id')
+        recipe_ids = request.data
+        db_controller = DatabaseController()
+        recipes_data = db_controller.delete_recipes(recipe_ids, user_id)
+
+        return Response({"detail": "Data deleted successfully."})
+    except Exception as ex:
+        print('An error occured:', ex)
+        return Response({"detail": "An error occured.", "error": str(ex)}, status=500)
