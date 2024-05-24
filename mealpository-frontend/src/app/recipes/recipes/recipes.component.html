@@ -45,7 +45,7 @@
             <div (click)="onRecipeClick(recipe)" *ngFor="let recipe of recipes" class="flex flex-col w-36 h-36 aspect-square border-2 border-d9d9d9 rounded-md hover:shadow-xl transition-transform transform hover:-translate-y-2 sm:w-44 sm:h-44 lg:w-52 lg:h-52">
                     
                 <p class="flex flex-col bg-0064ac w-full h-12 rounded-t-md text-left text-white px-4 py-1"> {{ recipe.title }} </p>
-                <div><img [src]="recipe.image_url" class="bg-cover bg-center w-full rounded-b-md h-[96px] sm:h-[128px] lg:h-[160px]"></div>
+                <div class="w-full h-[96px] sm:h-[128px] lg:h-[160px]"><img [src]="recipe.image_url" class="w-full h-full object-cover rounded-b-md"></div>
             </div>
 
         </div>
