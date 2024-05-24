@@ -12,13 +12,43 @@
 <div *ngIf="menuToggled" class="fixed bg-white text-base md:text-lg mt-14 md:mt-16 lg:mt-20 h-full w-5/12 max-w-[250px] top-0 left-0 z-50">
     <p *ngIf="loggedIn" class="px-4 mt-4 md:mt-6">good morning {{ firstName }}</p>
     <ul class="mt-4 md:mt-6">
-      <li><a (click)="onListClick('home')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">home</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('recipes')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">recipes</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('shopping-list')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">shopping list</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('calendar')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">meal plan</a></li>
-      <li><a (click)="onListClick('help')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">help</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('settings')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">settings</a></li>
-      <li *ngIf="loggedIn"><a (click)="onListClick('logout')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">log out</a></li>
-      <li *ngIf="!loggedIn"><a (click)="onListClick('login')" class="block px-4 py-2 cursor-pointer text-black hover:bg-597385">log in</a></li>
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[26px] h-[25px] object-cover" src="../assets/img/home-icon.png">
+            <li><a (click)="onListClick('home')" class="block text-black">home</a></li>
+        </div>
+        
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[26px] h-[25px] object-cover" src="../assets/img/recipe-icon.svg">
+            <li *ngIf="loggedIn"><a (click)="onListClick('recipes')" class="block text-black">recipes</a></li>
+        </div>
+
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[25px] h-[26px] object-cover" src="../assets/img/shopping-list-icon.svg">
+            <li *ngIf="loggedIn"><a (click)="onListClick('shopping-list')" class="block text-black">shopping list</a></li>
+        </div>
+
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[26px] h-[26px] object-cover" src="../assets/img/meal-plan-icon.svg">
+            <li *ngIf="loggedIn"><a (click)="onListClick('calendar')" class="block text-black">meal plan</a></li>
+        </div>
+
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[25px] h-[26px] object-cover" src="../assets/img/help-icon.svg">
+            <li><a (click)="onListClick('help')" class="block cursor-pointer text-black ">help</a></li>
+        </div>
+
+        <div class="flex flex-row items-center justify-between px-4 py-2 cursor-pointer hover:bg-597385">
+            <img class="w-[26px] h-[26px] object-cover" src="../assets/img/settings-icon.svg">
+            <li *ngIf="loggedIn"><a (click)="onListClick('settings')" class="block text-black">settings</a></li>
+        </div>
+      
+        <div class="flex flex-row items-center justify-end px-4 py-2 cursor-pointer hover:bg-597385">
+            <li *ngIf="loggedIn"><a (click)="onListClick('logout')" class="block cursor-pointer text-black hover:bg-597385">log out</a></li>
+        </div>
+
+        <div class="flex flex-row items-center justify-end px-4 py-2 cursor-pointer hover:bg-597385">
+            <li *ngIf="!loggedIn"><a (click)="onListClick('login')" class="block cursor-pointer text-black hover:bg-597385">log in</a></li>
+        </div>
+        
     </ul>
 </div>
