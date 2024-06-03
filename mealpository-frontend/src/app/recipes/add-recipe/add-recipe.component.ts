@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Recipe } from '../../models/recipe';
 import { IDGenerator } from '../../models/id_generator';
 import { AuthenticationService } from '../../authentication/services/authentication.service';
@@ -20,6 +20,7 @@ export class AddRecipeComponent {
   addForm: FormGroup
   ingredientCounter: string[];
   instructionCounter: string[];
+  formIssue: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -31,17 +32,13 @@ export class AddRecipeComponent {
     this.ingredientCounter = ['ing00000']; // use ing and a random length 8 id for each ingredient to be used for the form control name
     this.instructionCounter = ['ins00000']; // use ins and a random length 8 id for each ingredient to be used for the form control name
 
-    this.addForm = new FormGroup({ // Add more validators
-      title: new FormControl(),
-      prepTime: new FormControl(),
-      cookTime: new FormControl(),
-      totalTime: new FormControl(),
+    this.addForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      prepTime: new FormControl<number | null>(null, [Validators.required, this.numberValidator]),
+      cookTime: new FormControl<number | null>(null, [Validators.required, this.numberValidator]),
+      totalTime: new FormControl<number | null>(null, [Validators.required, this.numberValidator]), // Will get auto filled by prep time and cook time
       servings: new FormControl(),
-      //ingrQuantity: new FormControl(),
-      //ingredient: new FormControl(),
-      //ingrUnit: new FormControl(),
       description: new FormControl(),
-      instructions: new FormControl(),
       imageURL: new FormControl()
     });
 
@@ -57,7 +54,12 @@ export class AddRecipeComponent {
       this.addForm.addControl(inst + 'Instruction', this.fb.control('', Validators.required));
     });
 
+    this.formIssue = false;
   }
+
+  numberValidator = (control: FormControl<number | null>): ValidationErrors | null => {
+    return typeof control.value === 'number' && !isNaN(control.value) ? null : { notNumber: true };
+  };
 
   onFileProcessed(processedData: string[]): void { // update form with processed OCR data
     this.addForm.patchValue({
@@ -181,6 +183,8 @@ export class AddRecipeComponent {
       });
 
       this.router.navigateByUrl('recipes');
+    } else {
+      this.formIssue = true;
     }
     
   }
